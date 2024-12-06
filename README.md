@@ -376,7 +376,17 @@ Try this one first in the Exploit Server to see if XSS works (string `http` appe
 >***Identify*** that the search JavaScript `source code` on the target, the string is reflected in a JSON response called search-results.
 From the Site Map, open the `searchResults.js` file and notice that the JSON response is used with an `eval()` function call.
 
-![Reflected DOM-XSS source-code](images/reflected-dom-xss-source-code.png)  
+![Reflected DOM-XSS source-code](images/reflected-dom-xss-source-code.png)
+
+> This can be exploited by escaping the JS and making eval() function to interpret our custom malicious string, for example:
+
+```JavaScript
+eval('var test = 5-alert(1)');
+```
+
+> This works because JS interprets the variable declaration first AND then the `alert(1)` function, BOTH:
+
+![Reflected DOM XSS eval](images/js_eval().png)
 
 >Testing `\"-alert(1)}//` payload we successfully escape the `eval()`. The attacker then craft an exploit phishing link to the victim with a [cookie stealing payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) hosted on exploit server.  
 >Above payload validate that the backslash **\\** is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively **cancelled out**.  
