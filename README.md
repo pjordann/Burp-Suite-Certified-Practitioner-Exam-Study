@@ -149,7 +149,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
   
 -----
 
-## DOM-Based XSS  
+## DOM-Based XSS - buscar la keyword script en el código fuente + DOM Invader
 
 [DOM XSS Indicators](#identify-dom-xss)  
 [DOM XSS Identified with DOM Invader](#dom-invader)  
