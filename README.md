@@ -383,7 +383,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 
 >For example, if we search for `\"-alert(1)}//`, the response is the following
 
- ![Eval js](img/eval_js.png)
+ ![Eval js](images/eval_js.png)
 
  >As noticed, JSON response (second field) is escaped. As the entire string is passed to the `eval()` function, the `alert(1)` is interpreted. Alternatively, more complex payloads can be used:
 
