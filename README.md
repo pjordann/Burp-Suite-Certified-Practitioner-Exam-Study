@@ -659,6 +659,18 @@ As we can see, HTML code is injected in DOM (see image below) and executed. `win
 
 >Using a payload ```test'payload``` and observe that a single quote gets backslash-escaped, preventing breaking out of the string.
 
+Nevertheless, if character `\` (backslash) is not escaped, we could manage to fulfill the attack. Spoiler: it is escaped. Let's see an example:
+
+```
+\';alert(1);//
+```
+
+Pops this result:
+```
+var searchTerms = '\\\';alert(1);//';
+```
+>As we can see, character **backslash** is escaped and also the **single-quote** character. That's why our payload is treated as a whole string. 
+
 But, if we include this other payload to escape from the `<script>`:
 
 ```HTML
