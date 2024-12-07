@@ -610,7 +610,7 @@ https://0ab2007f0321177c85642b1300f500be.web-security-academy.net/#<img%20src=1%
 
 ![Result xss hashchange](images/xss_hashchange.png)
 
-As we can see, HTML code is injected in DOM (see image above) and executed. `window.location.hash.slice(1)` takes the string after `#` which is the payload being executed.
+As we can see, HTML code is injected in DOM (see image below) and executed. `window.location.hash.slice(1)` takes the string after `#` which is the payload being executed.
 
 >Below iframe uses **HASH** `#` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
   
@@ -620,7 +620,7 @@ As we can see, HTML code is injected in DOM (see image above) and executed. `win
 
 >Note if the cookie is secure with **HttpOnly** flag set enabled, the cookie cannot be stolen using XSS.  
 
->PortSwigger Lab payload perform print.  
+>PortSwigger Lab payload perform print. **IMPORTANT** to use `onload` event to append the payload to source URL (this.src). Iframe with only src malicious URL won't work because of how iframes are treated by browsers.
 
 ```JavaScript
 <iframe src="https://TARGET.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
