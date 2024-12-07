@@ -669,7 +669,7 @@ Pops this result:
 ```
 var searchTerms = '\\\';alert(1);//';
 ```
->As we can see, character **backslash** is escaped and also the **single-quote** character. That's why our payload is treated as a whole string. 
+>As we can see, character **backslash** is escaped and also the **single-quote** character. That's why our payload is treated as a whole string. See next section [Reflected String Extra Escape](#reflected-string-extra-escape) for more info.
 
 But, if we include this other payload to escape from the `<script>`:
 
