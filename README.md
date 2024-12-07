@@ -717,6 +717,12 @@ fuzzer\';console.log(12345);//
 fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computing`);//
 ```
 
+>For example, with the first Payload, this is the injection result:
+
+![](images/xss_extra_escape.png)
+
+As seen, single quote `'` is escaped but backslash is not. This way, JS string can be escaped.
+
 >Using a single **backslash**, single quote and **semicolon** we escape out of the JavaScript string variable, then using back ticks to enclose the ```document.location``` path, allow for the cookie stealer to bypass application protection.  
 
 ```
