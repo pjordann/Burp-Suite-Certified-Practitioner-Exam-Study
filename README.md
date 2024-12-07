@@ -829,13 +829,18 @@ print('PortSwigger Expert Academy Labs!')
 
 ### XSS Template Literal  
 
->JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target code we ***identify*** the search string is reflected inside a template literal string.  
+>JavaScript template literal is ***identified*** by the back ticks **`** used to contain the string. On the target code we ***identify*** the search string is reflected inside a template literal string.
 
+![xss template literal](images/xss-template-literal.png) 
+
+Backticks in JavaScript permit the user the insertion of JavaScript expressions `${expression}` such as `${1+1}`. If we try this out:
+
+![backticks](images/backticks_xss.png)
+
+It works. Lets configure a payload to steal cookies.
 ```
 ${alert(document.cookie)}
 ```  
-
-![xss template literal](images/xss-template-literal.png)  
   
 >I failed to get a working cookie stealer bypassing all the filters for this lab......  
 
