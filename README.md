@@ -657,7 +657,19 @@ As we can see, HTML code is injected in DOM (see image below) and executed. `win
 
 ![JavaScript string with single quote and backslash escaped](images/javascript-string-reflection.png)  
 
->Using a payload ```test'payload``` and observe that a single quote gets backslash-escaped, preventing breaking out of the string.  
+>Using a payload ```test'payload``` and observe that a single quote gets backslash-escaped, preventing breaking out of the string.
+
+But, if we include this other payload to escape from the `<script>`:
+
+```HTML
+</script><h1>test</h1>
+```
+
+![reflected script](images/reflected_xss.png)
+
+The variable `searchTerms` is undefined, the `script` tag is intentionally closed and the heading "test" is injected. 
+
+>Now, try the payload to execute JavaScript:
 
 ```JavaScript
 </script><script>alert(1)</script>
