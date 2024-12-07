@@ -392,7 +392,7 @@ From the Site Map, open the `searchResults.js` file and notice that the JSON res
 ```JavaScript
 var searchResultsObj = {"results":[],"searchTerm":"\\"-alert(1)}//"}
 ```
-> Character `"` is escaped with backslash and `eval()` function interprets the Javascript code `alert(1)` (the `-` character makes the evaluation possible).
+> Character `"` is escaped with backslash but we introduce another backslash character. This way, the resulting expression escapes the second backslash (not the `"`) and `eval()` function is able to interpret the Javascript code `alert(1)` (the `-` character makes the evaluation possible).
 
 >Alternatively, more complex payloads can be used:
 
