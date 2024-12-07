@@ -721,7 +721,7 @@ fuzzer\';alert(`Testing The backtick a typographical mark used mainly in computi
 
 ![](images/xss_extra_escape.png)
 
-As seen, single quote `'` is escaped but backslash is not. This way, JS string can be escaped.
+As seen, the resulting JS escapes de `\` character but does not escape the single quote `'`. This way, we can exit the JS string.
 
 >Using a single **backslash**, single quote and **semicolon** we escape out of the JavaScript string variable, then using back ticks to enclose the ```document.location``` path, allow for the cookie stealer to bypass application protection.  
 
