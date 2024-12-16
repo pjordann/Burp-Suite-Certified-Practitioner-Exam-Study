@@ -1255,6 +1255,20 @@ GET /js/geolocate.js?callback=setCountryCookie&callback=FUZZERFunction; HTTP/2
 >Not able to make cookie stealer payload working......  
 
 [PortSwigger Lab: Web cache poisoning via a fat GET request](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-fat-get)  
+
+Lab Summary:
+
+Using original request `GET /js/geolocate.js?callback=setCountryCookie` and inserting in the request BODY the `callback` function with it's value makes changes in the response:
+
+![fat-1](images/callback1.png)  
+
+We notice that the body is not part of the cache key (only the query paramenter is) because if we change the value of the body, cache response is the same as before:
+
+![fat-2](images/callback2.png)  
+
+So, we have cache poison. We just have to delete de body and reload the page (the victim's browser will do the request `/js/geolocate.js?callback=setCountryCookie` and the `alert(document.cookie)` will be executed.
+
+![fat-3](images/callback3.png)  
   
 -----
 
