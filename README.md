@@ -1387,7 +1387,11 @@ CheatSheet:
 ### TE.CL dualchunk - Transfer-encoding obfuscated  
 
 * Importante ==> las dos pruebas de la CHeatSheet nos dicen que es TE-TE. 
-* Objetivo? Engañar a uno de los dos servidores para que lea use la cabecera de CL en vez de TE. Para ello, ofuscamos la TE header con las técnicas de abajo, y cogeremos la tercera.
+* Objetivo? Engañar a uno de los dos servidores para que no procese la cabecera TE y procese la de CL. Para ello, ofuscamos la TE header con las técnicas de abajo, y cogeremos la tercera.
+
+El resumen del ataque es este:
+
+![te-te_cl](images/te-te_cl.png)
 
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use **obfuscation** techniques with second TE.  
 
