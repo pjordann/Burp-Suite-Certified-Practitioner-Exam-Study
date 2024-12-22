@@ -1485,6 +1485,29 @@ x=1
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-te-cl)  
 
+Mis notas:
+
+1. Comprobamos desde la web que `/admin` está bloqueado
+
+![amdinpaso1](images/admin-paso1.png)
+
+Trataremos de colar una petición `GET /admin` usando Smuggling ya que si la colamos en el servidor, se ejecutará desde ahí.
+
+2. Construimos el ataque:
+
+![amdinpaso2](images/admin-paso2.png)
+
+Detectamos con la CheatSheet que es TE-CL:
+
+- El frontend server procesa TE y enviará la request al backend con todo el cuerpo (el chunk de datos y el fin de chunk).
+- El backend server procesa CL y leerá solamente los 4 primeros bytes `6a\r\n`, dejando el resto de información de prefijo para la siguiente request.
+
+3. Enviamos la petición de ataque y otra normal:
+
+![amdinpaso3](images/admin-paso3.png)
+
+Comprobamos que se realiza la petición al panel de admin e investigando el HTML de la respuesta, obtenemos que se elimina al usuario con `/delete?username=carlos` 
+
 ### CL.TE multiCase - Admin blocked  
 
 >When attempting to access `/admin` portal URL path, we get the filter message, `Path /admin is blocked`. The HTTP Request Smuggler scanner ***identify*** the vulnerability as `CL.TE multiCase (delayed response)`.  
