@@ -1281,7 +1281,8 @@ So, we have cache poison. We just have to delete de body and reload the page (th
 
 ### Spoof IP Address  
 
->Flow of requests in password reset.
+Flow of requests in password reset.
+
 >User clicks on ¿Forget password? and inputs the username:
 
 ![pw1](images/password1.png)
