@@ -1386,6 +1386,9 @@ CheatSheet:
 
 ### TE.CL dualchunk - Transfer-encoding obfuscated  
 
+Importante ==> las dos pruebas de la CHeatSheet nos dicen que es TE-TE. 
+Objetivo? Hacer que uno de los dos servidores coja la cabecera CL en vez de TE. Para ello, tenemos las técnicas de abajo, y cogeremos la tercera.
+
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use **obfuscation** techniques with second TE.  
 
 ```
