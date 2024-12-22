@@ -1539,6 +1539,15 @@ x=
 
 [PortSwigger Lab: Exploiting HTTP request smuggling to bypass front-end security controls, CL.TE vulnerability](https://portswigger.net/web-security/request-smuggling/exploiting/lab-bypass-front-end-controls-cl-te)  
 
+Mis notas (igual que antes)
+
+Detectamos con la CheatSheet que es TE-CL. Construimos ataque:
+
+- El frontend server procesa CL y enviará la request al backend con todo el cuerpo (todo lo marcado en rojo son los 120 caracteres de la cabecera Content-Length)
+- El backend server procesa TE y leerá solamente el primer chunk, porque es el último. El resto de información se queda de prefijo para la siguiente request.
+
+![adm2](images/admin2.png)  
+
 ### CL.TE multiCase - Content-Length
 
 >Large Content-Length to capture victim requests. Sending a POST request with smuggled request but the content length is longer than the real length and when victim browse their cookie session value is posted to blob comment. Increased the comment-post request's Content-Length to **798**, then smuggle POST request to the back-end server.
