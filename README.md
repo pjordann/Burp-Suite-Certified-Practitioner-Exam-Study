@@ -1373,7 +1373,16 @@ csrf=TheCSRFTokenValue&username=carlos
 [HTTP/2 smuggling - CRLF injection Cookie Stealer](#http2-smuggling-via-crlf-injection)  
 [HTTP/2 TE - Admin Cookie Stealer](#http2-te-desync-v10a-h2path)
 
-:warning:
+:warning: Burp Repeater settings
+
+1. _Update Content Length_ option unticked.
+2. Inspector > Request attributes > HTTP/1
+3. Show `\n` and `\r` characters
+4. Change request method to POST
+
+CheatSheet:
+![smuggling](images/smuggling.png)
+[Lab: HTTP request smuggling, basic CL.TE vulnerability](https://www.youtube.com/watch?v=4S5fkKJ4SM4&list=PLGb2cDlBWRUX1_7RAIjRkZDYgAB3VbUSw&index=1)  
 
 ### TE.CL dualchunk - Transfer-encoding obfuscated  
 
