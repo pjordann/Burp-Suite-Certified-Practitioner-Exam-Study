@@ -1284,15 +1284,15 @@ So, we have cache poison. We just have to delete de body and reload the page (th
 >Flow of requests in password reset.
 >User clicks on ¿Forget password? and inputs the username:
 
-![pw1](images/password1.PNG)
+![pw1](images/password1.png)
 
 >GET request is sent to `/temp-forgot-password-token` of the host `0acf0005043258f4c900ccac00d0006b.web-security-academy.net` with the unique password change token.
 
-![pw2](images/password2.PNG)
+![pw2](images/password2.png)
 
 >POST request is sent to the same endpoint using unique token providing new password.
 
-![pw3](images/password3.PNG)
+![pw3](images/password3.png)
 
 IDEA ==> try to change host header so the GET request WITH TOKEN is sent to our evil host.
 
