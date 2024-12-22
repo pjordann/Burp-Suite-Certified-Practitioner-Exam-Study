@@ -1625,7 +1625,15 @@ Comprobamos como la siguiente petición realizada, por la víctima, se ha añadi
 
 ### CL.TE multiCase - User-Agent Cookie Stealer  
   
->***Identify*** the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.  
+>***Identify*** the UserAgent value is stored in the GET request loading the blog comment form, and stored in **User-Agent** hidden value. Exploiting HTTP request smuggling to deliver reflected XSS using **User-Agent** value that is then placed in a smuggled request.
+
+Evidencia de esto:
+
+![uA](images/userAgent.png)
+
+La cabecera de UserAgent se refleja en la respuesta del servidor. Hay XSS.
+
+Ojetivo ==> Smugglear una petición y meter un XSS en la cabecera User-Agent de `GET /post?postId=4`.
 
 >Basic Cross Site Scripting Payload escaping out of HTML document.  
 
