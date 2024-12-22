@@ -1393,6 +1393,8 @@ El resumen del ataque es este:
 
 ![te-te_cl](images/te-te_cl.png)
 
+El primer servidor interpreta la cabecera TE. No obstante, metiendo la ofuscación, conseguimos que el segundo servidor procese la de Content Length.
+
 >If Duplicate header names are allowed, and the vulnerability is detected as **dualchunk**, then add an additional header with name and value = **Transfer-encoding: cow**.  Use **obfuscation** techniques with second TE.  
 
 ```
