@@ -1541,7 +1541,7 @@ x=
 
 Mis notas (igual que antes)
 
-Detectamos con la CheatSheet que es TE-CL. Construimos ataque:
+Detectamos con la CheatSheet que es CL-TE. Construimos ataque:
 
 - El frontend server procesa CL y enviará la request al backend con todo el cuerpo (todo lo marcado en rojo son los 120 caracteres de la cabecera Content-Length)
 - El backend server procesa TE y leerá solamente el primer chunk, porque es el último. El resto de información se queda de prefijo para la siguiente request.
