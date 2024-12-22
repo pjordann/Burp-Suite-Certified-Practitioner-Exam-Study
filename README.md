@@ -3062,6 +3062,22 @@ Host: localhost
   
 ### Absolute GET URL + HOST SSRF
 
+Conceptos clave de este ataque: cómo se manejan las URLs relativas y absolutas.
+
+1. URLs realativas:
+
+![rel](images/relativa.png)
+
+El único valor para determinar el destino es la cabecera `Host`. Si no coincide con las reglas del servidor, rechaza la conexión.
+
+2. URLs absolutas
+
+![abs](images/absoluta.png)
+
+Aquí ya hay dos destinos, el que está en la propia URL absoluta y el del campo `Host`. Si el servidor tiene dudas y coge el domino en la cabecera `Host` para hacer la petición, las requests serán a `192.168.0.1/<path>`. 
+
+A continuación se comprueba como, poniendo URL absoluta + `Host`: Collaborator, la petición llega al Collaborator y no al dominio de la URL absoluta.
+
 >***Identify*** SSRF flawed request parsing vulnerability by changing the `HOST` header to Collaborator server and providing an absolute URL in the GET request line and observe the response from the Collaborator server.  
 
 ```html
