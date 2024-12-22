@@ -1281,6 +1281,21 @@ So, we have cache poison. We just have to delete de body and reload the page (th
 
 ### Spoof IP Address  
 
+>Flow of requests in password reset.
+>User clicks on ¿Forget password? and inputs the username:
+
+![pw1](images/password1.PNG)
+
+>GET request is sent to `/temp-forgot-password-token` of the host `0acf0005043258f4c900ccac00d0006b.web-security-academy.net` with the unique password change token.
+
+![pw2](images/password2.PNG)
+
+>POST request is sent to the same endpoint using unique token providing new password.
+
+![pw3](images/password3.PNG)
+
+IDEA ==> try to change host header so the GET request WITH TOKEN is sent to our evil host.
+
 >***Identify*** that altered HOST headers are supported, which allows you to spoof your IP address and bypass the IP-based brute-force protection or redirection attacks to do password reset poisoning.  
   
 >Include the below `X- ` headers and change the username parameter on the password reset request to `Carlos` before sending the request.  
