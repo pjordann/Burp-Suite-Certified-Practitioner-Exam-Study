@@ -1371,7 +1371,9 @@ csrf=TheCSRFTokenValue&username=carlos
 [CL.TE multiCase - Content-Length Cookie Stealer](#clte-multicase---content-length)  
 [CL.TE multiCase - User-Agent Cookie Stealer](#clte-multicase---user-agent-cookie-stealer)  
 [HTTP/2 smuggling - CRLF injection Cookie Stealer](#http2-smuggling-via-crlf-injection)  
-[HTTP/2 TE - Admin Cookie Stealer](#http2-te-desync-v10a-h2path)  
+[HTTP/2 TE - Admin Cookie Stealer](#http2-te-desync-v10a-h2path)
+
+:warning:
 
 ### TE.CL dualchunk - Transfer-encoding obfuscated  
 
