@@ -1685,9 +1685,37 @@ x=1
 
 ![recent searches](images/recent-searchs.png)  
 
+Importante:
+- Frontend server usa HTTP/2 (utiliza mecanismos internos para calcular la Content-Length)
+- Para el Backend server, nos dicen que se usa HTTP/1.1. Vamos a tratar de meter una petición que debería dar un 404
+
+![crlf1](images/crlf1.png)
+
+Al enviar esta petición y luego una normal, debería responder con un 404 ya que `GET /noExiste` es una ruta inexistente. Peeeero, responde 200 ==> no está interpretando la cabecera `Transfer-Encoding` bien.
+
+Idea? Quitamos la cabecera de la petición de arriba y la metemos como un request attribute, tal y como explicamos a continuación.
+
 >Expand the Inspector's Request Attributes section and change the protocol to HTTP/2, then append arbitrary header ```foo``` with value ```bar```, follow with the sequence ```\r\n```, then followed by the ```Transfer-Encoding: chunked```, by pressing **shift+ENTER**.  
 
 ![http2-inspector](images/http2-inspector.png)  
+![crlf2](images/crlf2.png)
+
+Con esto, sí obtenemos el 404. Nos aseguramos entonces de que está funcionando el ataque.
+Ahora ==> almacenar la request de la víctima usando la funcionalidad de la búsqueda. 
+
+De forma normal, al buscar `random`, esa misma palabra se ve reflejada en la respuesta
+
+![crlf3](images/crlf3.png)
+
+Vale, pues vamos a hacer lo mismo que con los comentarios del blog, smugglear esa petición. La petición de ataque:
+
+![crlf4](images/crlf4.png)
+
+El frontend se queda con el CL y coge todo el cuerpo.
+El backend interpreta el TE como atributo de la request y se queda con el chunk final.
+El resto del cuerpo, la petición POST, queda de prefijo. Como hemos puesto 800 de CL y el body son solo 12, el resto caracteres los coge de la siguiente request, que es la que hace la víctima y se añaden al texto de `search`.
+
+![crlf5](images/crlf5.png)
 
 >Note: enable the **Allow HTTP/2 ALPN override** option and change the body of HTTP/2 request to below POST request.  
 
