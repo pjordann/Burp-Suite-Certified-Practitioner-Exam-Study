@@ -1777,6 +1777,17 @@ Sec-Ch-Ua-Platform: "Linux"
 ![admin-panel-access](images/admin-panel-access.png)  
 
 [PortSwigger Lab: Response queue poisoning via H2.TE request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling)  
+
+Resumen:
+
+La idea es hacer esto:
+![h2-te](images/h2-te.png)  
+
+- Cada request maliciosa tiene embebida otra request smuggleada.
+- El front-end devuelve la respuesta a la primera petición, la respuesta a la segunda la deja en la cola.
+- Para la siguiente petición, el front-end devuelve la respuesta encolada y encola la respuesta a la petición actual.
+
+Así sucesivamente hasta que consigamos que la víctima haga una petición de login, se encole su respuesta y consigamos que nos la devuelva a nosotros. 
   
 -----
 
