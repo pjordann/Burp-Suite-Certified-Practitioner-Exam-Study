@@ -1691,7 +1691,7 @@ Importante:
 
 ![crlf1](images/crlf1.png)
 
-Al enviar esta petición y luego una normal, debería responder con un 404 ya que `GET /noExiste` es una ruta inexistente. Peeeero, responde 200 ==> no está interpretando la cabecera `Transfer-Encoding` bien.
+Al enviar esta petición y luego una normal, debería responder con un 404 ya que `GET /noExiste` es una ruta inexistente. Peeeero, responde 200 ==> *quita* la cabecera `Transfer-Encoding`.
 
 Idea? Quitamos la cabecera de la petición de arriba y la metemos como un request attribute, tal y como explicamos a continuación.
 
