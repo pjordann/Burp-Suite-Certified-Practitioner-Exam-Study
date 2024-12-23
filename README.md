@@ -1382,7 +1382,15 @@ csrf=TheCSRFTokenValue&username=carlos
 
 CheatSheet:
 ![smuggling](images/smuggling.png)
-[Lab: HTTP request smuggling, basic CL.TE vulnerability](https://www.youtube.com/watch?v=4S5fkKJ4SM4&list=PLGb2cDlBWRUX1_7RAIjRkZDYgAB3VbUSw&index=1)  
+[Lab: HTTP request smuggling, basic CL.TE vulnerability](https://www.youtube.com/watch?v=4S5fkKJ4SM4&list=PLGb2cDlBWRUX1_7RAIjRkZDYgAB3VbUSw&index=1) 
+
+Basic CL-TE:
+
+![cl-te](images/cl-te.png)
+
+Basic TE-CL:
+
+![te-cl](images/te-cl.png)
 
 ### TE.CL dualchunk - Transfer-encoding obfuscated  
 
