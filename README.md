@@ -1738,6 +1738,8 @@ search=nutty
 
 ### HTTP/2 TE desync v10a h2path
 
+[More info](https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning)
+
 >Target is vulnerable to request smuggling because the front-end server downgrades HTTP/2 requests even if they have an ambiguous length. Steal the  session cookie, of the admin visiting the target. The Burp extension, **HTTP Request Smuggler** will ***identify*** the vulnerability as HTTP/2 TE desync v10a (H2.TE) vulnerability.  
 
 ![HTTP/2 TE desync v10a h2path](images/HTTP2-TE-desync-v10a-h2path.png)  
