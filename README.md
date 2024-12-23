@@ -1504,7 +1504,7 @@ Detectamos con la CheatSheet que es TE-CL:
 
 - El frontend server procesa TE y enviará la request al backend con todo el cuerpo (el chunk de datos y el fin de chunk).
 - El backend server procesa CL y leerá solamente los 4 primeros bytes `6a\r\n`, dejando el resto de información de prefijo para la siguiente request.
-- ⚠️: El prefijo, es decir, la petición smugglead, tiene que tener de Content-Length la longitud del cuerpo + 1. En este caso, el cuerpo son 5B `0\r\n\r\n` y por eso la CL es 6.
+- ⚠️: El prefijo, es decir, la petición smugglead, tiene que tener de Content-Length la longitud del cuerpo + 1 (como mínimo). En este caso, el cuerpo son 5B `0\r\n\r\n` y por eso la CL es 6.
 
 3. Enviamos la petición de ataque y otra normal:
 
