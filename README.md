@@ -1933,6 +1933,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
   
 ## CSRF Account Takeover  
 
+[Token validation depends request method](#token-validation-depends-request-method)
 [OAuth](#oauth)  
 [Referer Validation CSRF](#referer-validation-csrf)  
 [Referer Header Present](#referer-header-present)  
@@ -1944,7 +1945,11 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [SameSite Strict bypass](#samesite-strict-bypass)  
 [SameSite Lax bypass](#samesite-lax-bypass)  
   
->Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address and use password reset to take over the account.  
+>Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address (change email or update email) and use password reset (change password, password reset or forgot password) to take over the account.
+
+### Token validation depends request method  
+
+>oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked. 
   
 ### OAuth  
 
