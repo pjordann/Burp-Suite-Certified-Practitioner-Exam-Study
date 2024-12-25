@@ -1979,6 +1979,8 @@ Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint
 
 ### Token validation depends request method
 
+Funcionalidad `update email` una vez tenemos acceso con cuente de usuario no privilegiada.
+
 En este caso, existe el token `anti-csrf` único y aleatorio para securizar las peticiones y no sabemos cuál será el de la víctima.
 
 ![reqmethod](images/reqmethod.png) 
@@ -2002,6 +2004,8 @@ Queda construir el ataque:
 ```
 
 ### OAuth  
+
+Login with social media.
 
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
