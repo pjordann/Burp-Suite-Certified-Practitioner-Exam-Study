@@ -2249,7 +2249,7 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 ![Password reset hidden username](images/passwoed-reset-hidden-username.png)  
 
-El frontend se "fía" de que el username enviado es `wiener` junto con su token. Pero si interceptamos esa petición y cambiamos el `username`, funciona. Incluso dejando el token asociado a `wiener` o quitándolo. Esto es porque el backend no hace una doble comprobación de que el token x pertenece al usuario x.
+El frontend se "fía" de que el username enviado es `wiener` junto con su token. Pero si interceptamos esa petición y cambiamos el `username` por otro también funciona, **incluso** dejando el token asociado a `wiener` o directamente quitándolo. Esto es porque el backend no hace una doble comprobación de que el token x pertenece al usuario x.
 
 >Exploit the post request by deleting the ```temp-forgot-password-token``` parameter in both the URL and request body. Change the username parameter to ```carlos```.  
 
