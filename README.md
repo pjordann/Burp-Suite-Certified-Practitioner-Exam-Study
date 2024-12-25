@@ -2260,6 +2260,7 @@ El frontend se "fía" de que el username enviado es `wiener` junto con su token.
 ### Current Password  
 
 Partimos de:
+- funcionalidad de cambio de password. En este caso no es de tipo `forgot-password` sino de tipo `change-password`. 
 - el campo `current-password` se puede quitar de la petición y se puede realizar el cambio de contraseña sin proporcionar la tuya actual.
 - el usuario al cual se le cambia la contraseña está indicado en el parámetro `username`. Si se cambia el valor del parámetro, la contraseña se modifica para ese otro usuario.
 
