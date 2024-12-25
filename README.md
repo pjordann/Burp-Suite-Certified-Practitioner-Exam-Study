@@ -2145,7 +2145,25 @@ csrf=TOKEN&username=administrator
   
 ### CSRF No Defences  
 
-Funcionalidad `update email` una vez tenemos acceso con cuente de usuario no privilegiada. 
+Funcionalidad `update email` una vez tenemos acceso con cuente de usuario no privilegiada.
+
+![csrf-no-defenses.png](images/no-defenses.png)  
+
+- Endpoint de cambio de correo: `/my-account/change-email`
+- La aplicación usa una cookie de sesión para identificar al usuario, **nada más** (no usa tokens u otros mecanismos).
+- Conocemos los parámetros de la petición, en este caso, el parámetro `email`.
+
+Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint con esos parámetros:
+
+```html
+<form method="POST" action="https://<host>.net/my-account/change-email"> 
+    <input type="hidden" name="email" value="anything@web-security-academy.net"> </form> 
+<script> 
+       document.forms[0].submit(); 
+</script>`
+```
+
+⚠️ Si hubiese token anti-csrf no se podría hacer esto porque no sabríamos el token de la víctima.
 
 >Target with no defences against email change function, can allow the privilege escalation to admin role. In the exam changing the email to the `attacker@EXPLOIT.NET` email address on the exploit server can allow the attacker to change the password of the admin user, resulting in privilege escalation.  
 >In the exam there is only ***one*** active user, and if the previous stage was completed using an attack that did not require the involving of the active user clicking on a link by performing poison cache or performing phishing attack by means of `Deliver to Victim` function, then CSRF change exploit can be used.  
