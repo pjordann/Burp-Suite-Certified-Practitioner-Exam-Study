@@ -2259,7 +2259,9 @@ El frontend se "fía" de que el username enviado es `wiener` junto con su token.
   
 ### Current Password  
 
-Partimos de la base de que el campo `current-password` se puede quitar de la petición y funciona.
+Partimos de:
+- el campo `current-password` se puede quitar de la petición y se puede realizar el cambio de contraseña sin proporcionar la tuya actual.
+- el usuario al cual se le cambia la contraseña está indicado en el parámetro `username`. Si se cambia el valor del parámetro, la contraseña se modifica para ese otro usuario.
 
 >***Identify*** the Change password do not need the ```current-password``` parameter to set a new password, and the **user** whom password will be changed is based on POST parameter ```username=administrator```  
 >In the PortSwigger labs they provide you the credentials for ```wiener:peter```, and this simulate in the exam stage 1 achieved low level user access. In exam this password reset vulnerability is example of how it is possible without **interaction** from active user to privilege escalate your access to admin.  
