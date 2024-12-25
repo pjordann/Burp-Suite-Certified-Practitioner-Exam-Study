@@ -1933,6 +1933,8 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
   
 ## CSRF Account Takeover  
 
+[CSRF No Defences](#csrf-no-defences)  
+[Token validation depends request method](#token-validation-depends-request-method)  
 [OAuth](#oauth)  
 [Referer Validation CSRF](#referer-validation-csrf)  
 [Referer Header Present](#referer-header-present)  
@@ -1940,12 +1942,48 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [CSRF duplicated in cookie](#csrf-duplicated-in-cookie)  
 [CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
-[CSRF No Defences](#csrf-no-defences)  
 [SameSite Strict bypass](#samesite-strict-bypass)  
 [SameSite Lax bypass](#samesite-lax-bypass)  
-[Token validation depends request method](#token-validation-depends-request-method)
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address (change email or update email) and use password reset (change password, password reset or forgot password) to take over the account.
+
+### CSRF No Defences  
+
+Funcionalidad `update email` una vez tenemos acceso con cuente de usuario no privilegiada.
+
+![csrf-no-defenses.png](images/no-defenses.png)  
+
+- Endpoint de cambio de correo: `/my-account/change-email`
+- La aplicación usa una cookie de sesión para identificar al usuario, **nada más** (no usa tokens u otros mecanismos).
+- Conocemos los parámetros de la petición, en este caso, el parámetro `email`.
+
+Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint con esos parámetros:
+
+```html
+<form method="POST" action="https://<host>.net/my-account/change-email"> 
+    <input type="hidden" name="email" value="anything@web-security-academy.net">
+</form> 
+<script> 
+       document.forms[0].submit(); 
+</script>
+```
+
+⚠️ Si hubiese token anti-csrf no se podría hacer esto porque no sabríamos el token de la víctima.
+
+>Target with no defences against email change function, can allow the privilege escalation to admin role. In the exam changing the email to the `attacker@EXPLOIT.NET` email address on the exploit server can allow the attacker to change the password of the admin user, resulting in privilege escalation.  
+>In the exam there is only ***one*** active user, and if the previous stage was completed using an attack that did not require the involving of the active user clicking on a link by performing poison cache or performing phishing attack by means of `Deliver to Victim` function, then CSRF change exploit can be used.  
+
+![csrf-change-email.png](images/csrf-change-email.png)  
+
+[PortSwigger Lab: CSRF vulnerability with no defences](https://portswigger.net/web-security/csrf/lab-no-defenses)  
+
+### Token validation depends request method
+
+En este caso, el token `csrf` para nuestras peticiones lo podemos ver, pero no sabemos cuál será el de la víctima.
+
+```html
+<a>
+```
   
 ### OAuth  
 
@@ -2143,36 +2181,6 @@ csrf=TOKEN&username=administrator
 
 ![CSRF privesc](images/csrf-privesc.png)  
   
-### CSRF No Defences  
-
-Funcionalidad `update email` una vez tenemos acceso con cuente de usuario no privilegiada.
-
-![csrf-no-defenses.png](images/no-defenses.png)  
-
-- Endpoint de cambio de correo: `/my-account/change-email`
-- La aplicación usa una cookie de sesión para identificar al usuario, **nada más** (no usa tokens u otros mecanismos).
-- Conocemos los parámetros de la petición, en este caso, el parámetro `email`.
-
-Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint con esos parámetros:
-
-```html
-<form method="POST" action="https://<host>.net/my-account/change-email"> 
-    <input type="hidden" name="email" value="anything@web-security-academy.net">
-</form> 
-<script> 
-       document.forms[0].submit(); 
-</script>
-```
-
-⚠️ Si hubiese token anti-csrf no se podría hacer esto porque no sabríamos el token de la víctima.
-
->Target with no defences against email change function, can allow the privilege escalation to admin role. In the exam changing the email to the `attacker@EXPLOIT.NET` email address on the exploit server can allow the attacker to change the password of the admin user, resulting in privilege escalation.  
->In the exam there is only ***one*** active user, and if the previous stage was completed using an attack that did not require the involving of the active user clicking on a link by performing poison cache or performing phishing attack by means of `Deliver to Victim` function, then CSRF change exploit can be used.  
-
-![csrf-change-email.png](images/csrf-change-email.png)  
-
-[PortSwigger Lab: CSRF vulnerability with no defences](https://portswigger.net/web-security/csrf/lab-no-defenses)  
-
 ### SameSite Strict bypass  
 
 >In the live chat function, we notice the `GET /chat HTTP/2` request do not use any unpredictable tokens, this can ***identify*** possible  [cross-site WebSocket hijacking](https://portswigger.net/web-security/websockets/cross-site-websocket-hijacking) (CSWSH) vulnerability if possible to bypass [SameSite](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions) cookie restriction.  
@@ -2254,14 +2262,6 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 [PortSwigger Lab: SameSite Lax bypass via cookie refresh](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-cookie-refresh)  
 
-### Token validation depends request method
-
-aaaaa
-
-```html
-<a>
-```
-    
 -----
 
 ## Password Reset  
