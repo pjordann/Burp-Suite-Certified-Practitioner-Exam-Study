@@ -2005,7 +2005,23 @@ Queda construir el ataque:
 
 ### OAuth  
 
-Login with social media.
+`Login with social media` o `attach a social profile`.
+
+Al iniciar sesión normal, con user y contraseña, se ve esta opción:
+
+![oauth2](images/oauth2.png) 
+
+Investigando con Burp, al hacer un `attach a social profile`, se hace esta petición:
+
+![oauth](images/oauth.png)  
+
+Observar que no tiene una protección `anti-csrf`.
+
+Idea ==> lo que se puede hacer es:
+- interceptar petición.
+- coger el código y hacer un DROP para que éste se mantenga válido y se pueda usar.
+- construir un `<iframe>` con esa petición para que el admin visite esa URL y se "atachee" su perfil de usuario `administrator` a ese código.
+- de esta forma, al loguearnos de nuevo, el perfil que se cargará será el del admin.
 
 >oAuth linking exploit server hosting iframe, then deliver to victim, forcing user to update code linked.  
 
