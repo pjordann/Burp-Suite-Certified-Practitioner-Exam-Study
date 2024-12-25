@@ -1939,6 +1939,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [Referer Validation CSRF](#referer-validation-csrf)  
 [Referer Header Present](#referer-header-present)  
 [LastSearchTerm](#lastsearchterm)  
+[CSRF not tied user session](#csrf-not-tied-user-session)  
 [CSRF duplicated in cookie](#csrf-duplicated-in-cookie)  
 [CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
@@ -2142,6 +2143,10 @@ history.pushState('', '', '/');
 
 [PortSwigger Lab: CSRF where token is tied to non-session cookie](https://portswigger.net/web-security/csrf/bypassing-token-validation/lab-token-tied-to-non-session-cookie)  
   
+### CSRF not tied user session 
+
+aaa
+
 ### CSRF duplicated in cookie  
 
 >In the target we ***identify*** that the CSRF key token is duplicated in the cookie value. Another ***indicator*** is the cookie ```LastSearchTerm``` contain the value searched. By giving search value that contain ```%0d%0a``` we can inject an **end of line** and **new line** characters to create new CSRF cookie and value.  
