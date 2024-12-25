@@ -2145,7 +2145,37 @@ history.pushState('', '', '/');
   
 ### CSRF not tied user session 
 
-aaa
+Funcionalidad update email una vez tenemos acceso con cuente de usuario no privilegiada.
+
+Consideraciones:
+- cada vez que se hace un update mail, cambia el token anti-csrf ==> si queremos jugar con él, hay que hacer un DROP de la petición para que sea válido.
+
+Como tenemos acceso a otra cuenta de usuario `carlos`, vamos a probar lo siguiente:
+- con la cuenta de `wiener`, hacemos el update email.
+- interceptamos la petición de cambio, guardamos el `token csrf` y hacemos un DROP de la petición (para usar el token más tarde).
+- construimos un iframe con la petición de cambio de correo añadiendo ese token.
+
+⚠️ Como el `token csrf` no está ligado a la sesión de `wiener`, cuando la víctima haga click en el `iframe`, cambiará su correo pese a estar usando nuestro token. Si cada token estuviese ligado a cada usuario, esto no pasaría.
+
+PoC
+
+1. Interceptamos el update email de `wiener`, guardamos el token y hacemos DROP de la petición:
+
+![tied1](images/tied1.png)
+
+2. Contruimos `iframe`:
+
+```html
+<form method="POST" action="https://0ad100a9043b5ded8160487f0097002d.web-security-academy.net/my-account/change-email"> 
+    <input type="hidden" name="email" value="anything@web-security-academy.net">
+    <input type="hidden" name="csrf" value="jGM056UrCA6l1Kj7SW9abys0MPvgL5wN">
+</form> 
+<script> 
+     document.forms[0].submit(); 
+</script>
+
+```
+
 
 ### CSRF duplicated in cookie  
 
