@@ -2235,7 +2235,7 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 [PortSwigger Lab: SameSite Lax bypass via cookie refresh](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-cookie-refresh)  
 
-## Token validation depends request method
+### Token validation depends request method
 
 aaaaa
 
