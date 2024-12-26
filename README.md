@@ -2372,6 +2372,9 @@ Conclusiones:
 2. Como el Login de la web `cms-` es vulnerable a XSS en el campo `username`, se ejecuta la POC de JS (encargada de obtener el historial de chats). Como estas peticiones parten de `cms-`, que es un subdominio de la web vulnerable, la política `SameSite` no salta y no hay problemas.
 3. Se recibe el historial de chats en el collaborator o en el exploit server (en cualquier valdría) y la password del usuario aparece en uno de esos chats. Se hace login y se ha obtenido su cuenta.
 
+💡 ALTERNATIVA:
+- Encontrar un stored XSS en algún post de la propia web vulnerable, almacenar la POC ahí y enviar el Link del post a la víctima. 
+
 [PortSwigger Lab: SameSite Strict bypass via sibling domain](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-sibling-domain)  
 
 [Helpful video](https://www.youtube.com/watch?v=U_z2OCAkoLk)
