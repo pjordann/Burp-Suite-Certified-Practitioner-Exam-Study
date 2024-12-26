@@ -2323,7 +2323,7 @@ csrf=TOKEN&username=administrator
 >The `SameSite=Strict` is set for session cookies and this prevent the browser from including these cookies in XSS cross-site requests. We ***Identify*** the header `Access-Control-Allow-Origin` in additional requests to script and images to a subdomain at `cms-`.  
 >Browsing to this CDN subdomain at `cms-` and then ***identify*** that random user name input is reflected, confirmed this to be a [reflected XSS](https://portswigger.net/web-security/cross-site-scripting/reflected) vulnerability.  
 
-[cms reflected xss samesite bypass](images/cms-reflected-xss-samesite-bypass.png)  
+![cms reflected xss samesite bypass](images/cms-reflected-xss-samesite-bypass.png)  
 
 ```
 https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C%2Fscript%3E&password=pass
