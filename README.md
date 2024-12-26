@@ -2048,7 +2048,15 @@ Funcionalidad update email una vez tenemos acceso con cuenta de usuario no privi
 
 ![referrer](images/referrer.png)  
 
->Adding original domain of target and append `history.pushState('', '', '/?TARGET.net');` to the **Referer header** in the form of a query string, allow the change email to update.  
+>Solution: Edit the JavaScript in the `iframe` so that the third argument of the `history.pushState()` function includes a query string with the lab instance URL to the **Referer header** so that the change email functionality is allowed:
+
+```html
+history.pushState("", "", "/?YOUR-LAB-ID.web-security-academy.net")
+```  
+
+This will cause the **Referer header** in the generated request to contain the URL of the target site in the query string, just like we tested earlier.
+
+Nevertheless, we may encounter an error. This is because many browsers now strip the query string from the Referer header by default as a security measure. Solution: 
 
 ```html
 Referrer-Policy: unsafe-url
