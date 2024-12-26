@@ -1944,7 +1944,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
 [SameSite Strict bypass](#samesite-strict-bypass)  
-[SameSite Strict bypass 2](#samesite-strict-bypass-2)
+[SameSite Strict bypass 2](#samesite-strict-bypass-2)  
 [SameSite Lax bypass](#samesite-lax-bypass)  
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address (change email or update email) and use password reset (change password, password reset or forgot password) to take over the account.
