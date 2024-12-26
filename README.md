@@ -1944,6 +1944,7 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 [CSRF Token Present](#csrf-token-present)  
 [Is Logged In](#is-logged-in)  
 [SameSite Strict bypass](#samesite-strict-bypass)  
+[SameSite Strict bypass 2](#samesite-strict-bypass-2)
 [SameSite Lax bypass](#samesite-lax-bypass)  
   
 >Cross-Site Request Forgery vulnerability allows an attacker to force users to perform actions that they did not intend to perform. This can enable attacker to change victim email address (change email or update email) and use password reset (change password, password reset or forgot password) to take over the account.
@@ -1956,6 +1957,7 @@ Funcionalidad `update email` una vez tenemos acceso con cuente de usuario no pri
 
 - Endpoint de cambio de correo: `/my-account/change-email`
 - La aplicación usa una cookie de sesión para identificar al usuario, **nada más** (no usa tokens u otros mecanismos).
+- la SameSite policy es `None`, es decir, se pueden enviar cookies desde cualquier dominio (con Lax o Strict habría que bypassear esta medida ==> ver laboratorios del final). 
 - Conocemos los parámetros de la petición, en este caso, el parámetro `email`.
 
 Idea ==> construir HTML que al hacer click, realice una petición a ese endpoint con esos parámetros:
@@ -2377,7 +2379,41 @@ Conclusiones:
 
 [PortSwigger Lab: SameSite Strict bypass via sibling domain](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-sibling-domain)  
 
-[Helpful video](https://www.youtube.com/watch?v=U_z2OCAkoLk)
+[Helpful video](https://www.youtube.com/watch?v=U_z2OCAkoLk)  
+
+### SameSite Strict bypass 2
+
+Consideraciones:
+- el endpoint vulnerable no es `/chat` sino que es el de upgrade email `/change-email` (no tiene token csrf)
+![notoken](images/notoken.png)  
+- la política SameSite de las cookies es `Strict` (solamente se pueden peticiones desde subdominios del dominio de la web vulnerble)
+![strict](images/strict2.png)  
+
+Objetivo (como siempre) ==> encontrar forma de bypassear el SameSite=`Strict`
+
+>Interceptando con Burp... Cuando se crea un post en el blog, se hace esta petición:
+
+![postID](images/postID.png)  
+
+Como podemos observar, lo que hace es usar el parámetro `postId` para construir dinámicamente el redirect a la ruta del post. Pero ojo, podemo cambiar el valor de postID para que nos redirija a otro punto de la web ==> por ejemplo, a `/my-account`:
+
+```
+GET https://0a20003103cd1a9981ff6b33009300ce.web-security-academy.net/post/comment/confirmation?postId=../my-account
+```
+
+>Esto redirije a la cuenta de usuario.
+
+💡 La idea entonces es construir un Link usando este concepto para cambiar el correo de la víctima. Conseguiríamos bypassear la policy porque la petición vendría desde el propio sitio web:
+
+```
+<script>
+    document.location = "https://TARGET.web-security-academy.net/post/comment/confirmation?postId=1/../../my-account/change-email?email=pwned%40web-security-academy.net%26submit=1";
+</script>
+```
+
+Al final, con la vulnerabilidad de `path traversal` conseguimos que el cambio de contraseña se haga desde la propia web vulnerable y no desde el exploit server (que no dejaría por la policy). 
+
+[PortSwigger Lab: SameSite Strict bypass via client-side redirect](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-client-side-redirect)  
 
 ### SameSite Lax bypass  
 
