@@ -2304,7 +2304,7 @@ csrf=TOKEN&username=administrator
   
 ### SameSite Strict bypass  
 
-1. `/chat` no usa token csrf así que es vulnerable a CSRF (víctima autenticada puede enviar solicitudes no deseadas al servidor en nombre del atacante, explotando la confianza del servidor en las cookies o tokens de sesión que el navegador de la víctima envía automáticamente).
+1. Live chat `/chat` no usa token csrf así que es vulnerable a CSRF (víctima autenticada puede enviar solicitudes no deseadas al servidor en nombre del atacante, explotando la confianza del servidor en las cookies o tokens de sesión que el navegador de la víctima envía automáticamente).
 
 >In the live chat function, we notice the `GET /chat HTTP/2` request do not use any unpredictable tokens, this can ***identify*** possible  [cross-site WebSocket hijacking](https://portswigger.net/web-security/websockets/cross-site-websocket-hijacking) (CSWSH) vulnerability if possible to bypass [SameSite](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions) cookie restriction.  
 
