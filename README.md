@@ -2038,9 +2038,15 @@ Idea ==> lo que se puede hacer es:
   
 ### Referer Validation CSRF  
 
->***Identify*** the change email function is vulnerable to CSRF by observing when the **Referer** header value is changed the response give message, `Invalid referer header`, and the email change is accepted when the referrer value contains the expected target domain somewhere in the value.  
+Funcionalidad update email una vez tenemos acceso con cuenta de usuario no privilegiada.
+
+>***Identify*** the change email function is vulnerable to CSRF by observing when the **Referer** header value is changed the response give message, `Invalid referer header`:    
 
 ![identify csrf referer header check](images/identify-csrf-referer-header-check.png)  
+
+>But the email change is accepted when the referrer value contains the expected target domain somewhere in the value:
+
+![referrer](images/referrer.png)  
 
 >Adding original domain of target and append `history.pushState('', '', '/?TARGET.net');` to the **Referer header** in the form of a query string, allow the change email to update.  
 
