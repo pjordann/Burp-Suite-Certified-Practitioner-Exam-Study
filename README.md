@@ -2368,9 +2368,9 @@ https://cms-TARGET.net/login?username=%3Cscript%3Ealert%28%27reflectXSS%27%29%3C
 
 Conclusiones:
 
-1. La víctima visita el exploit server y el script que ahí se encuentra hace que se emita la petición `"https://cms-TARGET.net/login?username=ENCODED-POC-CSWSH-SCRIPT&password=Peanut2019"`.
-2. La vulnerabilidad XSS de la web `cms-` hace que se ejecute la POC de JS que obtiene el historial de chats. Como estas peticiones parten de `cms-`, que es un subdominio de la web vulnerable, la política `SameSite` no salta y no hay problemas.
-3. Se obtiene el historial de chats, donde aparece la password del usuario. Se hace login y se ha obtenido su cuenta.
+1. La víctima visita el exploit server y el script que ahí se encuentra hace que se emita la petición `"https://cms-TARGET.net/login?username=ENCODED-POC-CSWSH-SCRIPT&password=Peanut2019"` al sitio `cms-`.
+2. Como el Login de la web `cms-` es vulnerable a XSS en el campo `username`, se ejecuta la POC de JS (encargada de obtener el historial de chats). Como estas peticiones parten de `cms-`, que es un subdominio de la web vulnerable, la política `SameSite` no salta y no hay problemas.
+3. Se recibe el historial de chats en el collaborator o en el exploit server (en cualquier valdría) y la password del usuario aparece en uno de esos chats. Se hace login y se ha obtenido su cuenta.
 
 [PortSwigger Lab: SameSite Strict bypass via sibling domain](https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-sibling-domain)  
 
