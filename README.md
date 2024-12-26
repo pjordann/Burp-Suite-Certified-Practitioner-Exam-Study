@@ -2162,7 +2162,8 @@ history.pushState('', '', '/');
 Funcionalidad update email una vez tenemos acceso con cuente de usuario no privilegiada.
 
 Consideraciones:
-- cada vez que se hace un update mail, cambia el token anti-csrf ==> si queremos jugar con él, hay que hacer un DROP de la petición para que sea válido.
+- cada vez que se hace un update mail, cambia el token anti-csrf.
+- si el token no está ligado a la sesión de usuario, podemos usarlo en peticiones correspondientes a otras sesiones.
 
 Como tenemos acceso a otra cuenta de usuario `carlos`, vamos a probar lo siguiente:
 - con la cuenta de `wiener`, hacemos el update email.
