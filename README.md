@@ -2381,6 +2381,10 @@ Conclusiones:
 
 ### SameSite Lax bypass  
 
+Consideraciones:
+- El valor de la política SameSite es Lax. Como no hay ninguna, el navegador coge `Lax` por defecto.
+- No hay token csrf en la funcionalidad de `update email`.
+
 >Observe if you visit `/social-login`, this automatically initiates the full OAuth flow. If you still have a logged-in session with the OAuth server, this all happens without any interaction., and in proxy history, notice that every time you complete the OAuth flow, the target site sets a new session cookie even if you were already logged in.  
 
 >Bypass the popup blocker, to induce the victim to click on the page and only opens the popup once the victim has clicked, with the following JavaScript. The exploit JavaScript code first refreshes the victim's session by forcing their browser to visit `/social-login`, then submits the email change request after a short pause. Deliver the exploit to the victim.  
