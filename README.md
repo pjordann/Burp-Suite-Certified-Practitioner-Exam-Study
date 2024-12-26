@@ -2194,6 +2194,37 @@ PoC
 
 ### CSRF duplicated in cookie  
 
+Consideraciones:
+
+En este caso, se aplica doble validación de token `csrf`:
+- cookie `csrf`
+- parámetro `csrf`
+
+La petición en la que ambos valores coincidan, es correcta. 
+
+⚠️ Si queremos montar un HTML malicioso podremos modificar el parámetro `csrf` de la petición POST PERO no podremos tocar la cookie `csrf` ya que la envía el navegador de la víctima.
+
+Idea ==> tratar de inyectar la cookie `csrf` con valor `test`. A continuación, enviar el POST con el parámetro `csrf` con el mismo valor (test).
+
+¿Cómo inyecto un valor que yo quiero para la cookie `csrf`? Con la cookie `LastSearchTerm`:
+
+![dupcookie](images/dupcookie.png) 
+
+El valor de la búsqueda `test` se refleja en la respuesta con un `Set-Cookie: LastSearchTerm=test; Secure; HttpOnly`. Podemos tratar de inyectar un valor para el token `csrf` usando:
+
+```
+/?search=test%0d%0aSet-Cookie:%20csrf=fake%3b%20SameSite=None
+```
+![dupcookie2](images/dupcookie2.png)  
+
+Con esto, se consigue establecer la cookie `csrf=fake` y ya podemos enviar el parámetro `csrf` con el valor de `fake` también.
+
+Conclusión, al hacer click en el HTML malicioso:
+
+1. Víctima envía petición a `/search` con el payload para que su navegador establezca la cookie `csrf` a `fake`.
+2. A continuación, envía el `<form>` con el POST a `/my-account/change-email` con el parámetro `csrf` es `fake`.
+3. El `img` del final es el que dispara todo esto. Realiza la petición al `/search` para poner la cookie `csrf=fake` y, como da error porque no es una imagen, envía el formulario con la petición cuyo parámetro `csrf=fake`.
+
 >In the target we ***identify*** that the CSRF key token is duplicated in the cookie value. Another ***indicator*** is the cookie ```LastSearchTerm``` contain the value searched. By giving search value that contain ```%0d%0a``` we can inject an **end of line** and **new line** characters to create new CSRF cookie and value.  
 
 ![set cookie csrf fake](images/set-cookie-csrf-fake.png)  
