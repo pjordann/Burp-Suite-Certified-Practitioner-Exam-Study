@@ -2789,7 +2789,7 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 
 ### Conclusiones útiles  
 
-- cookie. Ej: `TrackingId` o parámetro `sort-by` - resultados de la query NO devueltos en la respuesta, pero podemos fijarnos en esos 4 indicadores (CE, CR, VE-B, TD) para ver si la query devuelve información.
+- cookie (`TrackingId`) o parámetro (`sort-by` o `category`) - resultados de la query NO devueltos en la respuesta, pero podemos fijarnos en esos 4 indicadores (CE, CR, VE-B, TD) para ver si la query devuelve información.
 
 ```
 * Conditional response
