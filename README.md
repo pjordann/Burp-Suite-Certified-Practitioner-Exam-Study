@@ -2890,13 +2890,12 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
 ```
 
 3. To indicate type of technique. Example: --technique=T. The list of techniques with its letters is as follows:
-4. 
-    B: Boolean-based blind
-    E: Error-based
-    U: Union query-based
-    S: Stacked queries
-    T: Time-based blind
-    Q: Inline queries
+- B: Boolean-based blind
+- E: Error-based
+- U: Union query-based
+- S: Stacked queries
+- T: Time-based blind
+- Q: Inline queries
 -----
 
 ## JWT  
