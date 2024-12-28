@@ -2841,7 +2841,10 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 
 - SQLMAP essentials
 
-Chrome > Network > Copy as cURL > Paste in terminal
+Chrome > Network > Copy as cURL > Paste in terminal:
+
+![copyascurl.png](images/copyascurl.png)  
+
 Begining of line -> Ctrl + A
 End of line -> Ctrl + E
 
