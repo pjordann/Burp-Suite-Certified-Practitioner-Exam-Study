@@ -2907,29 +2907,12 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
 
 ## JWT  
 
-[JWT bypass via JWK](#manual-sqli)  
 [JWT Weak secret](#jwt-weak-secret)  
-[JWT kid header](#jwt-kid-header)  
+[JWT bypass via JWK header](#jwt-bypass-via-jwk-header)  
 [JWT arbitrary jku header](#jwt-arbitrary-jku-header)  
-
+[JWT kid header](#jwt-kid-header)  
 
 >JSON web tokens (JWTs) use to send cryptographically signed JSON data, and most commonly used to send information ("claims") about users as part of authentication, session handling, and access control.  
-
-### JWT bypass via JWK  
-
->The burp scanner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source.  
->**jwk (JSON Web Key)** - Provides an embedded JSON object representing the key.  
-
->Authentication bypass Exploit steps via jwk header injection:  
-
-1. New RSA Key (in JWT Editor)
-2. In request JWT payload, change the value of the **sub claim** to administrator  
-3. Select Attack, then select **Embedded JWK** with newly generated RSA key  
-4. Observe a ```jwk``` parameter now contain our public key, sending request result in access to admin portal  
-  
-![jwk header](images/jwk-header.png)  
-
-[PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
 
 ### JWT Weak secret  
 
@@ -2949,34 +2932,21 @@ Next steps:
 
 [PortSwigger JWT authentication bypass via weak signing key](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-weak-signing-key)  
 
-### JWT kid header  
+### JWT bypass via JWK header  
 
->JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the `kid` parameter in JWT header to fetch the relevant key from its file system.  
->Generate a new **Symmetric Key** and replace ` k ` property with the base64 null byte `AA==`, to be used when signing the JWT.  
->**kid (Key ID)** - Provides an ID that servers can use to identify the correct key in cases where there are multiple keys to choose from.  
+>The burp scanner ***identify*** vulnerability in server as, **JWT self-signed JWK header supported**. Possible to exploit it through failed check of the provided key source.  
+>**jwk (JSON Web Key)** - Provides an embedded JSON object representing the key.  
 
->JWS  
+>Authentication bypass Exploit steps via jwk header injection:  
 
-```
-{
-    "kid": "../../../../../../../dev/null",
-    "alg": "HS256"
-}
-```  
+1. New RSA Key (in JWT Editor)
+2. In request JWT payload, change the value of the **sub claim** to administrator  
+3. Select Attack, then select **Embedded JWK** with newly generated RSA key  
+4. Observe a ```jwk``` parameter now contain our public key, sending request result in access to admin portal  
+  
+![jwk header](images/jwk-header.png)  
 
->Payload  
-
-```
-{
-    "iss": "portswigger",
-    "sub": "administrator",
-    "exp": 1673523674
-}
-```  
-
-![jwt](images/jwt.png)  
-
-[PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
+[PortSwigger Lab: JWT authentication bypass via jwk header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jwk-header-injection)  
 
 ### JWT arbitrary jku header  
 
@@ -3013,6 +2983,35 @@ Next steps:
 ![jwt-jku-header-exploit-server.png](images/jwt-jku-header-exploit-server.png)  
 
 [PortSwigger Lab: JWT authentication bypass via jku header injection](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-jku-header-injection)  
+
+### JWT kid header  
+
+>JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the `kid` parameter in JWT header to fetch the relevant key from its file system.  
+>Generate a new **Symmetric Key** and replace ` k ` property with the base64 null byte `AA==`, to be used when signing the JWT.  
+>**kid (Key ID)** - Provides an ID that servers can use to identify the correct key in cases where there are multiple keys to choose from.  
+
+>JWS  
+
+```
+{
+    "kid": "../../../../../../../dev/null",
+    "alg": "HS256"
+}
+```  
+
+>Payload  
+
+```
+{
+    "iss": "portswigger",
+    "sub": "administrator",
+    "exp": 1673523674
+}
+```  
+
+![jwt](images/jwt.png)  
+
+[PortSwigger Lab: JWT authentication bypass via kid header path traversal](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-kid-header-path-traversal)  
   
 -----
 
