@@ -2957,8 +2957,8 @@ Next steps:
 
 1. Generate **New RSA Key pair** automatically, and ignore the size.  
 2. On the exploit server body create **empty JWK** ` { "keys": [ ] } `.  
-3. **Copy Public Key as JWK** from the new RSA key pair generate in previous step, in between the exploit body square brackets ` [ paste ] `.  
-4. Copy kid value of generate RSA key into the `/admin` request JWT header `kid` value.  
+3. Right click > **Copy Public Key as JWK** from the new RSA key pair generate in previous step, in between the exploit body square brackets ` [ paste ] `.  
+4. Copy kid value of generated RSA key into the `/admin` request JWT header `kid` value.  
 5. Set new ```jku``` parameter to the value of the exploit server URL `https://exploit-server.net/exploit`.  
 6. Change JWT payload value of the ```sub``` claim to `administrator`.  
 7. On the `/admin` request in repeat, at bottom of the JSON Web Token tab, click `Sign`.
