@@ -3063,6 +3063,8 @@ Pasos:
 
 ![protpoll1](images/protpoll1.png)
 
+See that plugin has a `0` in red ==> color red means that something was found.  
+
 2. Open dev tools > DOM Invader > `Scan for gadgets`:
 
 ![protpoll2](images/protpoll2.png) 
