@@ -2922,7 +2922,7 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
 
 >Authentication bypass Exploit steps via jwk header injection:  
 
-1. New RSA Key  
+1. New RSA Key (in JWT Editor)
 2. In request JWT payload, change the value of the **sub claim** to administrator  
 3. Select Attack, then select **Embedded JWK** with newly generated RSA key  
 4. Observe a ```jwk``` parameter now contain our public key, sending request result in access to admin portal  
