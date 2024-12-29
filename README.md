@@ -3055,6 +3055,28 @@ Example: if injected payload is `alert()` and the injection is inside an `eval(1
 
 >A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will ***identify*** the gadget and using a hosted payload to performing phishing directed at the victim and steal their cookie.  
 
+Pasos:
+
+..DOM Invader plugin > `Attack types` > `Prototype pollution is on` is checked
+
+1. Click on `Home` functionality in web.
+
+![protpoll1](images/protpoll1.png)
+
+2. Open dev tools > DOM Invader > `Scan for gadgets`:
+
+![protpoll2](images/protpoll2.png) 
+
+3. New window opens and scan begins. Invader found 1 sink:
+
+![protpoll3](images/protpoll3.png) 
+
+4. Click on `Exploit` and verify the XSS:
+
+![protpoll4](images/protpoll4.png) 
+
+5. Copy the malicious URL and paste it inside `script` tags on exploit server, as it is shown below.
+
 >Exploit server Body section, host an exploit that will navigate the victim to a malicious URL.  
 
 ```html
