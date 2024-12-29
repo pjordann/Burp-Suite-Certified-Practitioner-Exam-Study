@@ -2936,7 +2936,7 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
 >Brute force weak JWT signing key using `hashcat`.  
 
 ```bash
-hashcat -a 0 -m 16500 <YOUR-JWT> /path/to/jwt.secrets.list 
+hashcat -a 0 -m 16500 <YOUR-JWT> /usr/share/wordlists/jwt 
 ```  
 
 >Hashcat result provide the secret, to be used to generate a forged signing key.  
