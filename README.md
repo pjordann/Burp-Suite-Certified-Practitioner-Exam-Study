@@ -3097,6 +3097,8 @@ See that plugin has a `0` in red ==> color red means that something was found.
 
 ### Server-Side Proto  
 
+Funcionalidad de cambio de Billing and Delivery Address en `/my-account/change-address`
+
 >To ***identify*** Proto pollution, insert the follow into a JSON post request when updating a user profile information authenticated as low privileged role.  
 >See instruction video by [Trevor TJCHacking](https://youtu.be/oYAxbRiB0Jk) about PrivEsc via server-side prototype pollution.  
 
