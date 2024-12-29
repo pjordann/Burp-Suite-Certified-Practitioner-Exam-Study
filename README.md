@@ -3022,10 +3022,33 @@ Sign with the recently generated Symmetric key.
 
 >Attacker add arbitrary properties to global JavaScript object prototypes, which is inherited by user-defined objects that lead to client-side DOM XSS or server-side code execution.  
 
+[DOM Invader usage](#dom-invader-usage)  
 [Client-Side Proto](#client-side-proto)  
 [Server-Side Proto](#server-side-proto)  
 [Dom Invader Enable Prototype Pollution](https://portswigger.net/burp/documentation/desktop/tools/dom-invader/prototype-pollution#enabling-prototype-pollution)  
   
+### DOM Invader usage  
+
+1. Option "Prototype Pollution" has to be `On` 
+
+![pp1](images/pp1.png)
+
+2. Visit the page and look at `Dom Invader` plugin:
+
+![pp2](images/pp2.png)
+
+3. Open Dom Invader console and `Scan for Gadgets`:
+
+![pp3](images/pp3.png)
+
+New tab is opened and scan is done. Open dev tools and check.
+
+3. If exploit vector is detected, click `Exploit`:
+
+![pp4](images/pp4.png)
+
+Maybe some payload change is needed. Example: if payload is `alert()`, maybe we need to append `-` so the JS is executed.  
+
 ### Client-Side Proto  
 
 >A target is vulnerable to DOM XSS via client side prototype pollution. **[DOM Invader](#dom-invader)** will ***identify*** the gadget and using a hosted payload to performing phishing directed at the victim and steal their cookie.  
