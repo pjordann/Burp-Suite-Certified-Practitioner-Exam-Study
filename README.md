@@ -2986,9 +2986,10 @@ Next steps:
 
 ### JWT kid header  
 
->JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the `kid` parameter in JWT header to fetch the relevant key from its file system.  
->Generate a new **Symmetric Key** and replace ` k ` property with the base64 null byte `AA==`, to be used when signing the JWT.  
 >**kid (Key ID)** - Provides an ID that servers can use to identify the correct key in cases where there are multiple keys to choose from.  
+>JWT-based mechanism for handling sessions. In order to verify the signature, the server uses the `kid` parameter in JWT header to fetch the relevant key from its file system.  
+
+Generate a new **Symmetric Key** and replace ` k ` property with the base64 null byte `AA==`, to be used when signing the JWT.  
 
 >JWS  
 
@@ -3007,7 +3008,9 @@ Next steps:
     "sub": "administrator",
     "exp": 1673523674
 }
-```  
+```
+
+Sign with the recently generated Symmetric key.
 
 ![jwt](images/jwt.png)  
 
