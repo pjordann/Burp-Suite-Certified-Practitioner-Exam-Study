@@ -2939,7 +2939,13 @@ sudo sqlmap -u 'https://0ab100de04e9e4a58031307800c600e6.web-security-academy.ne
 hashcat -a 0 -m 16500 <YOUR-JWT> /usr/share/wordlists/jwt 
 ```  
 
->Hashcat result provide the secret, to be used to generate a forged signing key.  
+>Hashcat result provide the secret, to be used to generate a forged signing key.
+
+Next steps:
+- Generate forged signing key
+	- JWT Editor Keys > New Symmetric Key > Generate
+        - Replace `k` for the base64 encoded secret from hashcat
+ - Modify JWT with `administrator` and sign with the selected key 
 
 [PortSwigger JWT authentication bypass via weak signing key](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-weak-signing-key)  
 
