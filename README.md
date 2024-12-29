@@ -3047,7 +3047,9 @@ New tab is opened and scan is done. Open dev tools and check.
 
 ![pp4](images/pp4.png)
 
-Maybe some payload change is needed. Example: if injected payload is `alert()` and the injection is inside an `eval(1)` function, maybe we need to append `-` so the JS is executed ==> `eval(alert()-1)`
+⚠️ Maybe some payload change is needed. 
+
+Example: if injected payload is `alert()` and the injection is inside an `eval(1)` function, maybe we need to append `-` so the JS is executed ==> `eval(alert()-1)`
 
 ### Client-Side Proto  
 
