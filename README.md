@@ -3231,7 +3231,9 @@ Now, try to truncate the server-side query string using `#` endoded:
 
 ![api-resetpassword-leak-token](images/api-resetpassword-leak-token.png)  
 
-Browsing to the target URL and adding the stolen reset token, and change the administrator or carlos user password to gain access.  
+Browsing to the target URL and adding the stolen reset token ==> `/forgot-password?reset_token=c4ejcl8du4po5cy3pm6dn8n8l16am1p8`
+
+Change the administrator user password to gain access.  
 
 [PortSwigger Lab: Exploiting server-side parameter pollution in a query string](https://portswigger.net/web-security/api-testing/server-side-parameter-pollution/lab-exploiting-server-side-parameter-pollution-in-query-string)  
 
