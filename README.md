@@ -3449,10 +3449,11 @@ bruteforce$index:login(input:{password: "$password", username: "carlos"}) {
 
 ## CORS  
 
+[CORS Basic Origin reflection](#cors-basic-origin-reflection)  
 [Trusted insecure protocols](#trusted-insecure-protocols)  
 [Null origin trusted](#null-origin-trusted)  
 
-### Easy test
+### CORS Basic Origin reflection  
 
 - GET `/accountDetails` retrieves sensitive data and server responds with header :
 
