@@ -3148,6 +3148,16 @@ Funcionalidad de cambio de Billing and Delivery Address en `/my-account/change-a
 [Exploiting a mass assignment](#exploiting-a-mass-assignment)  
 [API Reset Password Parameter Pollution](#api-reset-password-parameter-pollution)  
 
+### Before that...  
+
+- Look for documentation endpoints:
+
+```
+/api
+/swagger/index.html
+/openapi.json
+```
+
 ### Exploiting a mass assignment  
 
 >API performing GET request and directly after a POST request and in the POST request notice additional JSON parameters in the body of response, indicate hidden parameter fields.
