@@ -3296,7 +3296,7 @@ Connection: close
 X-Original-URL: /admin
 ```  
 
-![admin1l](images/adminl.png)  
+![admin1](images/adminl.png)  
 
 This indicates that the back-end system is processing the URL from the `X-Original-URL` header.
 
