@@ -3210,6 +3210,8 @@ If the `isAdmin` value in the request is bound to the user object without adequa
 
 ### API Reset Password Parameter Pollution  
 
+Funcionalidad de `forgot password` en `/forgot-password` SIN necesidad de estar logueado. 
+
 >Notice the reset password API function uses parameter in POST body for username. To ***identify*** aditional hidden parameters for the API function insert random parameter ```&x=y``` to observe error message leaking information of positive result.
 >URL encode the random parameter and add it to current POST body parameters ```username=administrator%26x=y```.
 
