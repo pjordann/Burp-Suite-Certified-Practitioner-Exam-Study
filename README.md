@@ -3160,6 +3160,35 @@ Funcionalidad de cambio de Billing and Delivery Address en `/my-account/change-a
 
 ### Exploiting a mass assignment  
 
+A `PATCH /api/users/` request (enables users to update their username and email) includes the following JSON:
+```
+{
+    "username": "wiener",
+    "email": "wiener@example.com",
+}
+```
+
+And a `GET /api/users/123` request returns the following JSON:
+```
+{
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "isAdmin": "false"
+}
+```
+⚠️ This may indicate that the hidden `id` and `isAdmin` parameters are bound to the internal user object, alongside the updated `username` and `email` parameters.
+
+Now, send this JSON in the `PATCH` request:
+```
+{
+    "username": "wiener",
+    "email": "wiener@example.com",
+    "isAdmin": true,
+}
+```
+If the `isAdmin` value in the request is bound to the user object without adequate validation and sanitization ==> the user `wiener` may be incorrectly granted admin privileges.
+
 >API performing GET request and directly after a POST request and in the POST request notice additional JSON parameters in the body of response, indicate hidden parameter fields.
 >Add hidden fields such as `{"admin":true}` can elevate access to higher privileged users or gain sensitive information about user.
 
