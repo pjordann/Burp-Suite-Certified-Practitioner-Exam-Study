@@ -3296,7 +3296,13 @@ Connection: close
 X-Original-URL: /admin
 ```  
 
-![x-original-url](images/x-original-url.png)  
+![admin1l](images/adminl.png)  
+
+This indicates that the back-end system is processing the URL from the `X-Original-URL` header.
+
+To delete carlos:
+- add `?username=carlos` to the query string.
+- change `X-Original-URL` to `/admin/delete`.
   
 [PortSwigger Lab: URL-based access control can be circumvented](https://portswigger.net/web-security/access-control/lab-url-based-access-control-can-be-circumvented)  
   
