@@ -3490,7 +3490,9 @@ When victim clicks, the exploit server will generate a request to `/accountDetai
 
 ```
 Origin: http://subdomain.TARGET.NET
-```  
+```
+
+aa
 
 >The target call subdomain to retrieve stock values, and the `productid` parameter is vulnerable to cross-site scripting (XSS).
 
