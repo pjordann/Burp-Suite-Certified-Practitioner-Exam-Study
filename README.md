@@ -3215,13 +3215,13 @@ If the `isAdmin` value in the request is bound to the user object without adequa
 >Notice the reset password API function uses parameter in POST body for username. To ***identify*** aditional hidden parameters for the API function insert random parameter ```&x=y``` to observe error message leaking information of positive result.
 >URL encode the random parameter and add it to current POST body parameters ```username=administrator%26x=y```:
 
-![sspoll](images/sspoll)
+![sspoll](images/sspoll.png)
 
 **This suggests that the internal API may have interpreted &x=y as a separate parameter, instead of part of the username.**
 
 Now, try to truncate the server-side query string using `#` endoded:
 
-![sspoll2](images/sspoll2)
+![sspoll2](images/sspoll2.png)
 
 >Based on the response there is possible second parameter named `field` and reviewing the JavaScript source code there is `reset_token` parameter.
 
