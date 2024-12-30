@@ -3514,6 +3514,13 @@ Burp Target Site Map reveals subdomain:
 </script>
 ```  
 
+Conclusiones:
+- El link al exploit server se entrega a la víctima.
+- Víctima hace click y es redirigida hasta el exploit server.
+- El script del ES se ejecuta.
+- Se hace una llamada a `stock.blabla` con payload, que realiza un GET a `/accountDetails` y obtiene la session y token de la víctima.
+- Como la petición viene del subdominio `stock`, la webapp vulnerable la acepta y devuelve la información. 
+
 [PortSwigger Lab: CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)  
   
 ### Null origin trusted  
