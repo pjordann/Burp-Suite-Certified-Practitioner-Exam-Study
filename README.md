@@ -3508,7 +3508,13 @@ Origin: http://subdomain.TARGET.NET
   
 ### Null origin trusted  
 
->Identify the CORS insecure configuration by checking the AJAX response if it contains the `Access-Control-Allow-Credentials`, then add header `Origin: null`. If the `null` origin is reflected in the `Access-Control-Allow-Origin` header it is vulnerable.  
+>Identify the CORS insecure configuration by checking the AJAX response if it contains the `Access-Control-Allow-Credentials`:
+
+![cors0](images/cors0.png) 
+
+>then add header `Origin: null`. If the `null` origin is reflected in the `Access-Control-Allow-Origin` header it is vulnerable:
+
+![cors1](images/cors1.png) 
 
 >Payload that may work in BSCP exam to obtain the administrator account API and session cookie data. Host on exploit server.  
 
