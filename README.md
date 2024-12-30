@@ -3492,7 +3492,9 @@ When victim clicks, the exploit server will generate a request to `/accountDetai
 Origin: http://subdomain.TARGET.NET
 ```
 
-aa
+![protocors1](images/protocols1.png)  
+
+⚠️ Requests can be made from subdomain to web app. If XSS is found on subdomain, we can ==> `https://subdomain.vulnerable-website.com/?xss=<script>cors-stuff-here</script>`
 
 >The target call subdomain to retrieve stock values, and the `productid` parameter is vulnerable to cross-site scripting (XSS).
 
