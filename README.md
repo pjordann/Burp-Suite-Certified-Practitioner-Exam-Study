@@ -3494,7 +3494,13 @@ Origin: http://subdomain.TARGET.NET
 
 ![protocors1](images/protocols1.png)  
 
-⚠️ Requests can be made from subdomain to web app. If XSS is found on subdomain, we can ==> `https://subdomain.vulnerable-website.com/?xss=<script>cors-stuff-here</script>`
+⚠️ Origin is reflected in `Access-Control-Allow-Origin` header ==> Requests can be made from subdomain to web app. 
+
+💡 If XSS is found on subdomain, we can ==> `https://subdomain.vulnerable-website.com/?xss=<script>cors-stuff-here</script>`.
+
+Burp Target Site Map reveals subdomain:
+
+![subd](images/subd.png)
 
 >The target call subdomain to retrieve stock values, and the `productid` parameter is vulnerable to cross-site scripting (XSS).
 
