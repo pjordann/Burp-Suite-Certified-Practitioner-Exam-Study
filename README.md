@@ -3461,7 +3461,7 @@ bruteforce$index:login(input:{password: "$password", username: "carlos"}) {
 Access-Control-Allow-Credentials: true
 ``` 
 
-If this header is `true`, it means that requests **WITH credentials** can be made from any website.
+If this header is `true` and `Origin` value is reflected in server's header response ==> requests **WITH credentials** from that host can be made.
 
 - Craft a JS payload and deliver it to victim. Important `req.withCredentials=true` to exploit `Access-Control-Allow-Credentials: true`.
 
