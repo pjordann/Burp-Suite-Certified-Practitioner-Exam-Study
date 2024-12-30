@@ -3460,9 +3460,9 @@ bruteforce$index:login(input:{password: "$password", username: "carlos"}) {
 Access-Control-Allow-Credentials: true
 ``` 
 
-If this header is `true`, it means that requests can be made from any website.
+If this header is `true`, it means that requests **WITH credentials** can be made from any website.
 
-- Craft a JS payload and deliver it to victim. When victim clicks, the exploit server will generate a request to `/accountDetails` and append the response to `/log` request:
+- Craft a JS payload and deliver it to victim. Important `req.withCredentials=true` to exploit `Access-Control-Allow-Credentials: true`.
 
 ```
 <script>
@@ -3477,6 +3477,8 @@ If this header is `true`, it means that requests can be made from any website.
     };
 </script>
 ```
+
+When victim clicks, the exploit server will generate a request to `/accountDetails` and append the response to `/log` request.
 
 ### Trusted insecure protocols  
 
