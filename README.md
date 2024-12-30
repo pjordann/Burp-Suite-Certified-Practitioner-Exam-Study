@@ -3245,7 +3245,6 @@ Change the administrator user password to gain access.
 [Original URL](#original-url)  
 [Drop Select a role](#drop-select-a-role)  
 [Trace to Admin](#trace-to-admin)  
-[HTB requested I remove my write-up for CPTS Skills assessments - IDOR](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#idor)
 
 ### PrivEsc JSON RoleId  
 
