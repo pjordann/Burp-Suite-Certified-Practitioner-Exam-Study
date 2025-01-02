@@ -3566,7 +3566,6 @@ Conclusiones:
 [XXE SQLi inside XML + HackVertor](#sql--xml--hackvertor)  
 [XXE perform SSRF](#xxe--ssrf)  
 [XXE with SVG upload](#xxe-via-svg-image-upload)  
-[HackTheBox XML External Entity Injection - Private Github](https://github.com/botesjuan/cpts-quick-references/blob/main/module/Web-Attacks.md#xxe)  
   
 >File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.  
 
