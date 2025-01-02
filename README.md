@@ -3635,6 +3635,10 @@ Conclusiones:
   
 ### DTD Blind Error messages  
 
+Vulnerable to XXE:
+
+![xxeProve](images/xxe.png)
+
 >Trigger XML parsing errors in such a way that the error messages contain sensitive data. If the out of band to Collaborator payload above do not work test if the target will call a ```exploit.dtd``` file with invalid reference and return response in an error message.  
 
 >Hosted on exploit server the ```/exploit.dtd``` file and body contents to ```file:///invalid/``` path.  
