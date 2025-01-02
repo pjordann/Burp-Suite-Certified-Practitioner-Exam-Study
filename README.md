@@ -3744,7 +3744,7 @@ Host: localhost
 
 >***Identify*** the SSRF in the `stockAPI` parameter, and bypass the block by changing the URL target localhost and admin endpoint to: `http://127.1/%2561dmin`.  
 
->Double URL encode characters in URL to **Obfuscate** the `a` to `%2561`, resulting in the bypass of the blacklist filter.  
+>Double URL encode characters in URL to **Obfuscate** the `a` to `%25%36%31`, resulting in the bypass of the blacklist filter.  
 
 ![ssrf obfuscated](images/ssrf-obfuscated.png)  
 
