@@ -3603,6 +3603,8 @@ Conclusiones:
 
 ### DTD Blind Out-of-band  
 
+Here, Collaborator is needed because the client is treating the error and not responding with complete dump of the error message (as it does in next topic). 
+
 >On the exploit server change the hosted file name to ```/exploit.dtd``` as the exploit file with **Document Type Definition (DTD)** extension, containing the following payload. The ```&#x25;``` is the Unicode hex character code for percent sign ```%```. **[Parameter entities](https://academy.hackthebox.com/module/134/section/1206)** are referenced using the **percent** character instead of the usual ampersand.  
 
 ```xml
