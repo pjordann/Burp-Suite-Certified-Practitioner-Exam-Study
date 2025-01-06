@@ -399,6 +399,10 @@ var searchResultsObj = {"results":[],"searchTerm":"\\"-alert(1)}//"}
 
 If `"` where not escaped, simply use `"-alert(1)-"` or `"-alert(1)}//`
 
+If WAF blocks, use ``"-alert`1`-"`` changing parenthesis for backticks.
+
+If not, directly try to escape JSON with `"}; document.location="https://example.com/;//"`
+
 >Alternatively, more complex payloads can be used:
 
 ```JavaScript
