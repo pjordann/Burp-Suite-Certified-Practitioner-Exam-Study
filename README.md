@@ -1414,6 +1414,7 @@ csrf=TheCSRFTokenValue&username=carlos
 [TE.CL multiCase - Admin blocked](#tecl-multiCase---admin-blocked)  
 [CL.TE multiCase - Admin blocked](#clte-multicase---admin-blocked)  
 [CL.TE multiCase - Content-Length Cookie Stealer](#clte-multicase---content-length)  
+[CL.TE multiCase - Request rewrite](https://portswigger.net/web-security/request-smuggling/exploiting/lab-reveal-front-end-request-rewriting)  
 [CL.TE multiCase - User-Agent Cookie Stealer](#clte-multicase---user-agent-cookie-stealer)  
 [HTTP/2 smuggling - CRLF injection Cookie Stealer](#http2-smuggling-via-crlf-injection)  
 [HTTP/2 TE - Admin Cookie Stealer](#http2-te-desync-v10a-h2path)
