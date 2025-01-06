@@ -397,6 +397,8 @@ var searchResultsObj = {"results":[],"searchTerm":"\\"-alert(1)}//"}
 ```
 > Character `"` is escaped with backslash but we introduce another backslash character. This way, the resulting expression escapes the second backslash (not the `"`) and `eval()` function is able to interpret the Javascript code `alert(1)` (the `-` character makes the evaluation possible).
 
+If `"` where not escaped, simply use `"-alert(1)-"` or `"-alert(1)}//`
+
 >Alternatively, more complex payloads can be used:
 
 ```JavaScript
