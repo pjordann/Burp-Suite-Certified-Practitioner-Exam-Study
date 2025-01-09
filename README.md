@@ -1892,6 +1892,8 @@ Solución ==> Run a Macro
 7. En Resource pool > Maximum concurrent requests > 1
 8. Ejecutar el ataque
 
+[Lab 2FA bypass](https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-bypass-using-a-brute-force-attack)
+
 ### Stay-Logged-in  
 
 >Login option with a stay-logged-in check-box result in Cookie value containing the password of the user logged in and is vulnerable to brute-forcing.  
