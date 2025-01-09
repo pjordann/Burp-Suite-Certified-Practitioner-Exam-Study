@@ -1875,7 +1875,7 @@ Así sucesivamente hasta que consigamos que la víctima haga una petición de lo
 
 Caso de uso
 
->Petición que solamente podemos ejecutar un número **determinado** de veces porque va atada a un csrf token y si la ejecutamos más, salta esto:
+>Petición que solamente podemos ejecutar un número **determinado** de veces porque va atada a un csrf token y si la ejecutamos más, salta esto `"Invalid CSRF token (session does not contain a CSRF token)"` o similar:
 
 ![csrf1](images/csrf1.png)  
 
