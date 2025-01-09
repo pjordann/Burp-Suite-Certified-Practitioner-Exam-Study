@@ -1865,10 +1865,32 @@ Así sucesivamente hasta que consigamos que la víctima haga una petición de lo
 
 ## Brute Force  
 
+[Bypass restrictions (2FA, CSRF check, etc)](#bypass-restrictions)  
 [Stay-Logged-in](#stay-logged-in)  
 [Stay-logged-in Offline Crack](#stay-logged-in-offline-crack)  
 [Brute Force Protected Login](#brute-force-protected-login)  
 [Subtly Invalid Login](#subtly-invalid-login)  
+
+### Bypass restrictions
+
+Caso de uso
+
+>Petición que solamente podemos ejecutar un número **determinado** de veces porque va atada a un csrf token y si la ejecutamos más, salta esto:
+
+![csrf1](images/csrf1.png)  
+
+Posibles endpoints ==> /refresh-password, /login
+
+Solución ==> Run a Macro
+
+1. Crear Macro con Session Handling Rules panel > Add
+2. Scope > Include all URLs
+3. Rule Actions, click Add > Run a macro
+4. Seleccionar los enpoints que de forma natural me hacen llegar hasta la petición que quiero explotar (en el caso del código, todas las peticiones anteriores a la de meter el código de verificación)
+5. Test Macro varias veces para ver que funciona
+6. La petición a explotar, llevarla al intruder y meter el payload que corresponda
+7. En Resource pool > Maximum concurrent requests > 1
+8. Ejecutar el ataque
 
 ### Stay-Logged-in  
 
