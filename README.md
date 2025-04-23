@@ -1,7 +1,6 @@
 
 # Burp Suite Certified Practitioner Exam Study  
 
-> >LINK [EXAMEN BSCP](https://www.scribd.com/document/677248757/BSCP-Official-Exam)  
 >This is my study notes with over a 110 PortSwigger Academy Labs.
 >I used these labs to pass the [Burp Suite Certified Practitioner](https://portswigger.net/web-security/certification) Exam 2023.
 >My [BSCP qualification](https://portswigger.net/web-security/e/c/6e42f5738e5b9bf8).  
