@@ -2013,6 +2013,17 @@ very-long-strings-so-very-long-string-so-very-long-string-so-very-long-string-so
 ![How To Create a Macro in Burp Suite Professional](images/create-macro.png)  
 
 [PortSwigger Lab: Infinite money logic flaw - show how to create Burp Macro](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-infinite-money)  
+
+Resumen:
+
+- Unkeyed header
+
+GET req to home page with cache buster ?cb=1234
+Add `X-Forwarded-Host` with host example.com or google.com
+Send
+See if host is reflected in response in /resources/js/tracking.js
+See if `X-Cache: hit` is present
+
   
 -----
 
