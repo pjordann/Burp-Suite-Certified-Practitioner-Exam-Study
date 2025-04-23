@@ -2065,7 +2065,7 @@ And then send it through intruder with null payloads like 100 or so times\
 
 XSS in the search bar, the one where you have to check every tag, and every attribute through Burp Intruder\
 **Tags and attribute that was allowed:**\
-<body onhashchange=>\
+`<body onhashchange=>`\
 **Payload that was sent to victim**\
 
 ```
