@@ -2047,7 +2047,7 @@ Ir al Burp Repeater y añadir `X-Forwarded-Host` con la URL del exploit server:\
 X-Forwarded-Host: exploit-server-id.web-security-academy.net\
 cambiar el username a carlos y darle a send.\
 
-- Smuggling + XSS en el User Agent\
+- Smuggling + XSS en el User Agent
 Burp Scanner o extensión Smuggler para encontrar el HTTP Smuggling.\
 Quitar las cabeceras useless como "Sec".\
 Añadir al final de la request generada por Burp (cambiando deatos de URLs y demás):\
