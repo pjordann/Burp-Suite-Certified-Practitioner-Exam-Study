@@ -3707,6 +3707,18 @@ Conclusiones:
 ![CORS-NULL trusted](images/CORS-NULL.png)  
 
 [PortSwigger Lab: CORS vulnerability with trusted null origin](https://portswigger.net/web-security/cors/lab-null-origin-whitelisted-attack)  
+
+Resumen:  
+
+- SQLi en búsqueda avanzada
+- roleid
+- sesiones  
+
+ventana normal entrar como carlos > cambiar email.\
+Activar Interceptor.\
+En Incognito en otra ventana del navegador enviar solicitud de contraseña para administrator.\
+Intercambiar la cookie y csrf token de la solicitud de correo electrónico para carlos.\
+Ahora se debe asignar cookie con admin y login como true.\
   
 -----
 
