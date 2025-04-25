@@ -24,12 +24,12 @@
   
 **[PRIVILEGE ESCALATION](#privilege-escalation) - Stage 2**  
 [CSRF - Account Takeover](#csrf-account-takeover)  
-[Password Reset](#password-reset)  
 [SQLi - SQL Injection](#sql-injection)  
+[Access Control](#access-control)  
+[Password Reset](#password-reset)  
 [JWT - JSON Web Tokens](#jwt)  
 [Prototype pollution](#prototype-pollution)  
 [API Testing](#api-testing)  
-[Access Control](#access-control)  
 [GraphQL API Endpoints](#graphql-api)  
 [CORS - Cross-origin resource sharing](#cors)  
   
